@@ -17,7 +17,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import ProcessInfo from './components/processInfo';
+import ProcessInfo from './components/processInfo/processInfo';
 import Main from './components/main';
 
 type AppProps = {
@@ -32,7 +32,7 @@ const App: React.FC<AppProps> = ({}) => {
       messageAction: messageAction.Add,
       taskType: taskType.BruteForce,
       name: 'brute - hacked.com',
-      url: 'wp url here',
+      url: 'https://www.taksihelsinki.fi/',
     }
     ipcRenderer.send('ping', JSON.stringify(task));
   }

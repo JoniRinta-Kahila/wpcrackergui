@@ -12,7 +12,7 @@
     "build:mac": "electron-builder build --mac --x64"
   },
   "build": {
-    "appId": "com.devtography.electron_boilerplate",
+    "appId": "com.rintsi.wpcracker_gui",
     "productName": "WPCracker-GUI",
     "directories": {
       "app": "./dist/",
@@ -31,13 +31,14 @@
     },
     "buildVersion": "1"
   },
-  "author": "Joni Rinta-Kahila",
+  "author": "Joni Rinta-Kahila @JoniRinta-Kahila",
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "electron": "^11.1.1",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
+    "react-collapsible": "^2.8.3",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
@@ -79,7 +80,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Devtography/electron-react-typescript-webpack-boilerplate"
+    "url": "git+https://github.com/JoniRinta-Kahila/wpcrackergui"
   },
   "keywords": [
     "boilerplate",
@@ -89,7 +90,7 @@
     "Webpack"
   ],
   "bugs": {
-    "url": "https://github.com/Devtography/electron-react-typescript-webpack-boilerplate/issues"
+    "url": "https://github.com/JoniRinta-Kahila/wpcrackergui/issues"
   },
-  "homepage": "https://github.com/Devtography/electron-react-typescript-webpack-boilerplate#readme"
+  "homepage": "https://github.com/JoniRinta-Kahila/wpcrackergui#readme"
 }

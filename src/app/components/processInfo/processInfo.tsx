@@ -5,6 +5,9 @@ import styles from './processInfo.module.scss'
 import { Typography } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Header from './header';
+import Collapsible from 'react-collapsible';
+import EnumResult from './enumResult';
 
 type ProcessInfoProps = {
   data : rxMessage[],
@@ -22,12 +25,7 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
 
   return ( !currentProc?.Id ? <h1>Error, Process id not found!</h1> :
     <>
-    <div className={styles.header}>
-      <h1>
-        {currentProc.TaskType !== 1 || 2 ? 'User Enumeration\n' : 'Brute Force\n'}
-      </h1>
-      <h2>{currentProc.Url}</h2>
-    </div>
+    <Header currentProc={currentProc}/>
     <section className={styles.container}>
       <div className={styles['progress-left']}>
         <Box className={styles.progress}>
@@ -45,6 +43,8 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
       </div>
       <div className={styles.progress}></div>
     </section>
+    
+    <EnumResult currentProc={currentProc} />
     </>
   )
 }

@@ -19,8 +19,8 @@ export enum taskType {
 }
 
 export type result = {
-  bruteForce?: bruteResult,
-  userEnumeration?: enumResult[],
+  BruteForce?: bruteResult,
+  UserEnumeration?: enumResult[],
 }
 
 export type bruteResult = {
@@ -29,24 +29,24 @@ export type bruteResult = {
 }
 
 export type enumResult = {
-  id: string,
-  name: string,
-  description: string,
-  link: string,
-  url: string,
-  slug: string,
+  Id: string,
+  Name: string,
+  Description: string,
+  Link: string,
+  Url: string,
+  Slug: string,
 }
 
-export type message = {
-  messageAction: messageAction,
-  taskType: taskType,
-  id: number,
-  name: string,
-  url: string,
-  percentage: number,
-  result?: result,
-  status?: taskStatus,
-}
+// export type message = {
+//   messageAction: messageAction,
+//   taskType: taskType,
+//   id: number,
+//   name: string,
+//   url: string,
+//   percentage: number,
+//   result?: result,
+//   status?: taskStatus,
+// }
 
 //
 
@@ -57,7 +57,7 @@ export type rxMessage = {
   Name: string,
   Url: string,
   Percentage: number,
-  Result?: result,
+  TaskResult?: result,
   Status?: taskStatus,
 }
 
