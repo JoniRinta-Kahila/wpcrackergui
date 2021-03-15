@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "DXgJhipKKpxRht5/4D5uEk2bXnT36aSgC7NuArEny7pkBSA2KZVUkkxA63z6PLj9dBzQ4noQZ+Z1vNJfteXp+w==",
+  "success": true,
+  "projectFilePath": "C:\\WorkTEMP\\WPTest\\react-background-service\\react-background-service.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\joniR\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
