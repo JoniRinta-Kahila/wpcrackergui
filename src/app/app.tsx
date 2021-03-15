@@ -32,7 +32,7 @@ const App: React.FC<AppProps> = ({}) => {
       messageAction: messageAction.Add,
       taskType: taskType.BruteForce,
       name: 'brute - hacked.com',
-      url: 'https://www.taksihelsinki.fi/',
+      url: 'url here 🥴',
     }
     ipcRenderer.send('ping', JSON.stringify(task));
   }
