@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DXgJhipKKpxRht5/4D5uEk2bXnT36aSgC7NuArEny7pkBSA2KZVUkkxA63z6PLj9dBzQ4noQZ+Z1vNJfteXp+w==",
+  "dgSpecHash": "XRh7JOtF19vUt7BU2G2NmozLxu9twsF7wv8mxDEz0FXZzTZYlK/CqBnZsJDaekRjXoAmGArLKskp3E5GMsf6WA==",
   "success": true,
-  "projectFilePath": "C:\\WorkTEMP\\WPTest\\react-background-service\\react-background-service.csproj",
+  "projectFilePath": "C:\\WorkTEMP\\wpcrackergui\\react-background-service\\react-background-service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joniR\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],

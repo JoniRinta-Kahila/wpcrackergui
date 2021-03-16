@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\WorkTEMP\\WPTest\\react-background-service\\react-background-service.csproj": {}
+    "C:\\WorkTEMP\\wpcrackergui\\react-background-service\\react-background-service.csproj": {}
   },
   "projects": {
-    "C:\\WorkTEMP\\WPTest\\react-background-service\\react-background-service.csproj": {
+    "C:\\WorkTEMP\\wpcrackergui\\react-background-service\\react-background-service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\WorkTEMP\\WPTest\\react-background-service\\react-background-service.csproj",
+        "projectUniqueName": "C:\\WorkTEMP\\wpcrackergui\\react-background-service\\react-background-service.csproj",
         "projectName": "react-background-service",
-        "projectPath": "C:\\WorkTEMP\\WPTest\\react-background-service\\react-background-service.csproj",
+        "projectPath": "C:\\WorkTEMP\\wpcrackergui\\react-background-service\\react-background-service.csproj",
         "packagesPath": "C:\\Users\\joniR\\.nuget\\packages\\",
-        "outputPath": "C:\\WorkTEMP\\WPTest\\react-background-service\\obj\\",
+        "outputPath": "C:\\WorkTEMP\\wpcrackergui\\react-background-service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

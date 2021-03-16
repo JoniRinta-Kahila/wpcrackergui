@@ -2,7 +2,7 @@ import { Button, TextField } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import url from 'url';
 import validUrl from 'valid-url';
-import { messageAction, taskType, txMessage } from '_/types/message';
+import { MessageAction, TaskType, TxMessage } from '_/types/message';
 import { ipcRenderer } from 'electron';
 
 type EnumFormProps = {
@@ -11,11 +11,11 @@ type EnumFormProps = {
 
 const newEnum = async (url: string, name: string) => {
   console.log('Executed')
-  const task: txMessage = {
-    messageAction: messageAction.Add,
-    taskType: taskType.Enumeration,
-    name: name,
-    url: url,
+  const task: TxMessage = {
+    MessageAction: MessageAction.Add,
+    TaskType: TaskType.Enumeration,
+    Name: name,
+    Url: url,
   }
   ipcRenderer.send('ping', JSON.stringify(task));
 }

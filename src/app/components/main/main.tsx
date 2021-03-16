@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { messageAction, taskStatus, taskType } from '_/types/message';
+import React, { useState } from 'react';
 import styles from './main.module.scss';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import url from 'url';
-import validUrl from 'valid-url';
-import { Button } from '@material-ui/core';
 import EnumForm from './enumForm';
 
 type MainProps = {

@@ -1,34 +1,34 @@
-export enum messageAction {
+export enum MessageAction {
   Add = 0,
   Remove = 1,
   Ping = 2,
   Null = 3,
 }
 
-export enum taskStatus {
+export enum TaskStatus {
   Stopped = 0,
   Starting = 1,
   Running = 2,
   Ready = 3,
 }
 
-export enum taskType {
+export enum TaskType {
   Enumeration = 0,
   BruteForce = 1,
   Null = 2,
 }
 
-export type result = {
-  BruteForce?: bruteResult,
-  UserEnumeration?: enumResult[],
+export type Result = {
+  BruteForce?: BruteResult,
+  UserEnumeration?: EnumResult[],
 }
 
-export type bruteResult = {
-  username: string,
-  password: string,
+export type BruteResult = {
+  Username: string,
+  Password: string,
 }
 
-export type enumResult = {
+export type EnumResult = {
   Id: string,
   Name: string,
   Description: string,
@@ -37,37 +37,25 @@ export type enumResult = {
   Slug: string,
 }
 
-// export type message = {
-//   messageAction: messageAction,
-//   taskType: taskType,
-//   id: number,
-//   name: string,
-//   url: string,
-//   percentage: number,
-//   result?: result,
-//   status?: taskStatus,
-// }
-
-//
-
-export type rxMessage = {
-  MessageAction: messageAction,
-  TaskType: taskType,
+export type RxMessage = {
+  MessageAction: MessageAction,
+  TaskType: TaskType,
   Id: number,
   Name: string,
   Url: string,
   Percentage: number,
-  TaskResult?: result,
-  Status?: taskStatus,
+  TaskResult?: Result,
+  Status?: TaskStatus,
 }
 
-export type txMessage = {
-  messageAction: messageAction,
-  taskType: taskType,
-  url: string,
-  name: string,
+export type TxMessage = {
+  MessageAction: MessageAction,
+  TaskType: TaskType,
+  Url: string,
+  Name: string,
 }
 
-export type txPing = {
-  messageAction: messageAction,
+//
+export type TxPing = {
+  MessageAction: MessageAction,
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { rxMessage, taskType } from '_/types/message';
-import { Link, useParams } from 'react-router-dom';
+import { RxMessage } from '_/types/message';
+import { useParams } from 'react-router-dom';
 import styles from './processInfo.module.scss'
 import { Typography } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
@@ -10,14 +10,14 @@ import EnumResult from './enumResult';
 import AddProcessBtn from './addProcessBtn';
 
 type ProcessInfoProps = {
-  data : rxMessage[],
+  data : RxMessage[],
 }
 
 const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
   const procId = useParams<{ processId: string }>();
   console.log(`id = ${procId.processId}`)
 
-  const [currentProc, setCurrentProc] = useState<rxMessage>();
+  const [currentProc, setCurrentProc] = useState<RxMessage>();
 
   useEffect(() => {
     setCurrentProc(data.find(x => x.Id.toString() === procId.processId))

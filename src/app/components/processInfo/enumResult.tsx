@@ -1,10 +1,10 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
-import { rxMessage } from '_/types/message';
+import { RxMessage } from '_/types/message';
 import styles from './enumResult.module.scss';
 
 type EnumResultProps = {
-  currentProc : rxMessage,
+  currentProc : RxMessage,
 }
 
 const EnumResult: React.FC<EnumResultProps> = ({ currentProc }) => {

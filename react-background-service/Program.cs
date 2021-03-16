@@ -56,14 +56,13 @@ namespace react_background_service
 
                         if (action.Type == Task.TaskType.Enumeration)
                         {
-                            
                             var enumTask = new System.Threading.Tasks.Task(async () =>
                             {
                                 var index = ProcessList.FindIndex(a => a.Id == id + 1);
                                 var process = ProcessList[index];
 
                                 ProcessList[index].TaskStatus = Task.Status.Running;
-                                
+
                                 var client = new HttpClient();
                                 var response = await client.GetAsync(process.Url + "/wp-json/wp/v2/users");
                                 response.EnsureSuccessStatusCode();
@@ -72,11 +71,11 @@ namespace react_background_service
 
                                 // save result
                                 ProcessList[index].TaskResult.UserEnumeration = list;
-                                
+
                                 // update task status
                                 ProcessList[index].TaskStatus = Task.Status.Ready;
                                 ProcessList[index].Percentage = 100;
-                                
+
                                 SendStatus();
                             });
                             enumTask.Start();

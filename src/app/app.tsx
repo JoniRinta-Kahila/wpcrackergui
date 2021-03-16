@@ -4,11 +4,9 @@ import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { ipcRenderer } from 'electron';
 import {
-  messageAction,
-  rxMessage,
-  taskStatus,
-  taskType,
-  txMessage,
+  RxMessage,
+  TaskStatus,
+  TaskType,
 } from '_/types/message';
 import styles from './app.module.scss';
 import {
@@ -25,7 +23,7 @@ type AppProps = {
 }
 
 const App: React.FC<AppProps> = ({}) => {
-  const [processes, setProcesses] = React.useState<rxMessage[]>([]);
+  const [processes, setProcesses] = React.useState<RxMessage[]>([]);
   
   React.useEffect(() => {
     const listener = (event: Electron.IpcRendererEvent, response: string) => {
@@ -55,11 +53,11 @@ const App: React.FC<AppProps> = ({}) => {
               processes.map((task) => {
                 return (
                   <Link key={task.Id} to={`/${task.Id}`}>
-                  <li key={task.Id} style={{background: task.TaskType === taskType.BruteForce ? '#ca1dff' : ''}}>
+                  <li key={task.Id} style={{background: task.TaskType === TaskType.BruteForce ? '#ca1dff' : ''}}>
                     {
-                      task.Status == taskStatus.Starting ? <h1>Starting</h1> : 
-                      task.Status == taskStatus.Ready ? <h1>Ready</h1> : 
-                      task.Status == taskStatus.Stopped ? <h1>Stopped</h1> : 
+                      task.Status == TaskStatus.Starting ? <h1>Starting</h1> : 
+                      task.Status == TaskStatus.Ready ? <h1>Ready</h1> : 
+                      task.Status == TaskStatus.Stopped ? <h1>Stopped</h1> : 
 
                       <Box className={styles.task}>
                         <CircularProgress

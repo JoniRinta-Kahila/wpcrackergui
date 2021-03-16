@@ -1,9 +1,9 @@
 import React from 'react';
-import { rxMessage } from '_/types/message';
+import { RxMessage } from '_/types/message';
 import styles from './header.module.scss';
 
 type HeaderProps = {
-  currentProc : rxMessage,
+  currentProc : RxMessage,
 }
 
 const Header: React.FC<HeaderProps> = ({ currentProc }) => {
