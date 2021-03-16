@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { rxMessage, taskType } from '_/types/message';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from './processInfo.module.scss'
 import { Typography } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Header from './header';
-import Collapsible from 'react-collapsible';
 import EnumResult from './enumResult';
+import AddProcessBtn from './addProcessBtn';
 
 type ProcessInfoProps = {
   data : rxMessage[],
@@ -30,10 +30,8 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
       <div className={styles['progress-left']}>
         <Box className={styles.progress}>
           <CircularProgress
-            // className={styles.muiCircular}
             size='150px'
-            variant='determinate' 
-            // color={task.Status === taskStatus.Stopped ? 'primary' : 'secondary'} 
+            variant='determinate'
             value={currentProc.Percentage}
           />
           <Typography className={styles['progress-typo']} variant="caption" component="div">{`${Math.round(
@@ -43,8 +41,11 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
       </div>
       <div className={styles.progress}></div>
     </section>
-    
+
     <EnumResult currentProc={currentProc} />
+    
+    <AddProcessBtn />
+
     </>
   )
 }

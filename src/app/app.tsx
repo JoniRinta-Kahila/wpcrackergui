@@ -18,7 +18,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import ProcessInfo from './components/processInfo/processInfo';
-import Main from './components/main';
+import Main from './components/main/main';
 
 type AppProps = {
   
@@ -26,16 +26,6 @@ type AppProps = {
 
 const App: React.FC<AppProps> = ({}) => {
   const [processes, setProcesses] = React.useState<rxMessage[]>([]);
-  
-  const addTask = async () => {
-    const task: txMessage = {
-      messageAction: messageAction.Add,
-      taskType: taskType.BruteForce,
-      name: 'brute - hacked.com',
-      url: 'url here 🥴',
-    }
-    ipcRenderer.send('ping', JSON.stringify(task));
-  }
   
   React.useEffect(() => {
     const listener = (event: Electron.IpcRendererEvent, response: string) => {
@@ -55,9 +45,9 @@ const App: React.FC<AppProps> = ({}) => {
       <div className={styles.wrapper}>
         <div className={styles.sidebar}>
 
-          <button onClick={addTask}>
+          {/* <button onClick={() => newEnum()}>
             New
-          </button>
+          </button> */}
 
           <h2>Task list</h2>
           <ul>
@@ -92,7 +82,7 @@ const App: React.FC<AppProps> = ({}) => {
         </div>
         <div className={styles.main}>
           <Switch>
-            <Route exact path='/' component={Main} />
+            <Route exact path='/' render={() => <Main />} />
             <Route exact path='/:processId' render={() => <ProcessInfo data={processes} /> } />
           </Switch>
         </div>
