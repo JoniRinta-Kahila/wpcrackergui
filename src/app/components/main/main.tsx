@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styles from './main.module.scss';
 import EnumForm from './form/enumForm';
 import FormSetter from './form/formSetter';
+import TextField from '@material-ui/core/TextField';
+import BruteForm from './form/bruteForm';
 
 type MainProps = {
   
@@ -20,8 +22,8 @@ const Main: React.FC<MainProps> = () => {
       <FormSetter selectedForm={taskType} formSetter={setTaskType} />
       {
         taskType === 0 ?
-        <EnumForm/> :
-        <p>Brute Force currently not supported.</p>
+        <EnumForm /> :
+        <BruteForm />
       }
     </div>
     </>

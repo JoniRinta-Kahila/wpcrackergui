@@ -59,6 +59,14 @@ function createWindow(): void {
     coreProcess.stdin.write(`${message}\n`);
   });
 
+  // file dialog opener
+  ipcMain.on('open-file-dialog-for-dir', async event => {
+    const dir = await dialog.showOpenDialog({ properties: ['openFile'] });
+    if (dir) {
+      mainWindow?.webContents.send('selected-file', dir.filePaths[0]);
+    }
+  });
+
   coreProcess.stdout.on('data', (data: Buffer) => {
     mainWindow?.webContents.send('data-from-backend', data.toString());
   });
