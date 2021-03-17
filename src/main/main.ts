@@ -6,10 +6,31 @@ import * as path from 'path';
 import * as url from 'url';
 import { spawn } from 'child_process';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { BrowserWindow, app, ipcMain } from 'electron';
+import { BrowserWindow, app, ipcMain, dialog } from 'electron';
+import { Platform } from '_/types/platform';
+import fs from 'fs';
 
-const exePath = path.resolve('react-background-service/bin/Debug/netcoreapp3.1/react-background-service.exe');
-const coreProcess = spawn(exePath);
+const platform = () => {
+  const pf = process.platform;
+  if (pf === "win32") {
+    return process.arch === 'x64' ? Platform.Win64 : Platform.Win32;
+  }
+  throw dialog.showErrorBox('OS ERROR', `OS ${pf} is not currently supported.`);
+}
+
+const corePath = () => {
+  // release
+  let cPath = path.resolve(`core/${platform()}/react-background-service.exe`);
+  if (fs.existsSync(cPath)) return cPath;
+
+  // debug
+  cPath = path.resolve(`build-includes/core/${platform()}/react-background-service.exe`);
+  if (fs.existsSync(cPath)) return cPath;
+  
+  throw dialog.showErrorBox('CORE ERROR', 'core not found');
+}
+
+const coreProcess = spawn(corePath());
 
 let mainWindow: Electron.BrowserWindow | null;
 

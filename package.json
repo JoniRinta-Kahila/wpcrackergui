@@ -29,13 +29,18 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     },
+    "extraFiles": [
+      {
+        "from": "./build-includes/",
+        "to": "."
+      }
+    ],
     "buildVersion": "1"
   },
   "author": "Joni Rinta-Kahila @JoniRinta-Kahila",
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
-    "electron": "^11.1.1",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-collapsible": "^2.8.3",
