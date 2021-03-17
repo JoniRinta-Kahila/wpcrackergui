@@ -8,7 +8,9 @@
     "dev": "rimraf dist && cross-env NODE_ENV=development webpack --watch --progress --color",
     "prod": "rimraf dist && cross-env NODE_ENV=production webpack --progress --color",
     "test": "mocha -r ts-node/register -r tsconfig-paths/register \"test/**/*.ts\"",
-    "build:win": "electron-builder build --win --x64",
+    "cleanCore": "npx rimraf ./build-includes/core/",
+    "winCoreBuild": "dotnet publish -c Release -r win-x64 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/Win64/ && dotnet publish -c Release -r win-x86 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/Win32/",
+    "build:win": "npm run cleanCore && npm run winCoreBuild && electron-builder build --win",
     "build:mac": "electron-builder build --mac --x64"
   },
   "build": {

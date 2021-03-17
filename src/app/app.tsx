@@ -43,10 +43,6 @@ const App: React.FC<AppProps> = ({}) => {
       <div className={styles.wrapper}>
         <div className={styles.sidebar}>
 
-          {/* <button onClick={() => newEnum()}>
-            New
-          </button> */}
-
           <h2>Task list</h2>
           <ul>
             {
