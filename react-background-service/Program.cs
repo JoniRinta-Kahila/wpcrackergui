@@ -61,6 +61,7 @@ namespace react_background_service
                         {
                             var enumTask = new System.Threading.Tasks.Task(async () =>
                             {
+                                // ToDo: [enumTask Task Cancellation]
                                 var index = ProcessList.FindIndex(a => a.Id == id + 1);
                                 var process = ProcessList[index];
 
@@ -90,6 +91,7 @@ namespace react_background_service
                     {
                         var bruteTask = new System.Threading.Tasks.Task(() =>
                         {
+                            // ToDo: [bruteTask Task Cancellation]
                             var uri = "";
                             var username = "";
                             var wordListPath = "";

@@ -19,6 +19,7 @@ namespace react_background_service
 
         public async Task<bool> LoginAttemptAsync(string user, string password)
         {
+            // ToDo: [LoginAttemptAsync Task Cancellation]
             var dic = new Dictionary<string, string>
             {
                 ["log"] = user,

@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import styles from './main.module.scss';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import EnumForm from './enumForm';
+import EnumForm from './form/enumForm';
+import FormSetter from './form/formSetter';
 
 type MainProps = {
   
@@ -20,22 +17,12 @@ const Main: React.FC<MainProps> = () => {
     </div>
 
     <div className={styles.form}>
-      <FormControl>
-        <InputLabel id="taskType">Attack type</InputLabel>
-        <Select
-            value={taskType}
-            style={{ margin: 8 }}
-            defaultValue={0}
-            onChange={(e) => setTaskType(e.target.value as number)}
-            margin="dense"
-          >
-            <MenuItem value={0}>User Enumeration</MenuItem>
-            <MenuItem value={1}>Brute force</MenuItem>
-          </Select>
-      </FormControl> <br/>
-
-      <EnumForm/>
-
+      <FormSetter selectedForm={taskType} formSetter={setTaskType} />
+      {
+        taskType === 0 ?
+        <EnumForm/> :
+        <p>Brute Force currently not supported.</p>
+      }
     </div>
     </>
   )
