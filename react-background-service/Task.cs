@@ -7,7 +7,7 @@ namespace react_background_service
     public class Task
     {
         public Action MessageAction { get; set; }
-        public TaskType Type { get; set; }
+        public Type TaskType { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
@@ -31,7 +31,7 @@ namespace react_background_service
             Ready = 3,
         }
 
-        public enum TaskType
+        public enum Type
         {
             Enumeration = 0,
             BruteForce = 1,

@@ -43,7 +43,7 @@ namespace react_background_service
                             Percentage = 0,
                             Url = action.Url,
                             TaskStatus = Task.Status.Starting,
-                            Type = action.Type,
+                            TaskType = action.TaskType,
                             MessageAction = Task.Action.Ping,
                             TaskResult = new Result()
                             {
@@ -54,7 +54,7 @@ namespace react_background_service
 
                         SendStatus();
 
-                        if (action.Type == Task.TaskType.Enumeration)
+                        if (action.TaskType == 0) // Task.TaskType.Enumeration
                         {
                             var enumTask = new System.Threading.Tasks.Task(async () =>
                             {
