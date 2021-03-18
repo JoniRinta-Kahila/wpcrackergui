@@ -1,0 +1,16 @@
+.advanced .header {
+  width: 80%;
+  height: 60px;
+  background: linear-gradient(0deg, rgba(240,255,255,1) 0%, rgba(108,182,182,1) 40%, rgba(97,176,176,1) 59%, rgba(240,255,255,1) 100%);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.advanced .header .content {
+  flex: 0 0 120px;
+  line-height: 60px;
+  color: black;
+  font-size: 18px;
+  white-space: nowrap;
+}

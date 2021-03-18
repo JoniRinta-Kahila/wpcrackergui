@@ -1,3 +1,5 @@
+import { Options } from "./options"
+
 export enum MessageAction {
   Add = 0,
   Remove = 1,
@@ -53,6 +55,9 @@ export type TxMessage = {
   TaskType: TaskType,
   Url: string,
   Name: string,
+  Username: string,
+  WordList: string,
+  Options: Options
 }
 
 //

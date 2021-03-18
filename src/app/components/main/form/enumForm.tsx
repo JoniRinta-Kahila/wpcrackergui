@@ -16,6 +16,15 @@ const newEnum = async (url: string, name: string) => {
     TaskType: TaskType.Enumeration,
     Name: name,
     Url: url,
+    Username: '',
+    WordList: '',
+    Options: {
+      BruteForceOptions: {
+        BatchCount: 0,
+        MaxThreads: 0,
+        RetryCount: 0,
+      }
+    }
   }
   ipcRenderer.send('ping', JSON.stringify(task));
 }

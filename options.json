@@ -1,0 +1,7 @@
+{
+  "bruteForceOtions": {
+    "MaxThreads": 12,
+    "BatchCount": 1000,
+    "RetryCount": 3
+  }
+}

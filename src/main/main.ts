@@ -1,11 +1,6 @@
-/* eslint-disable linebreak-style */
-/**
- * Entry point of the Election app.
- */
 import * as path from 'path';
 import * as url from 'url';
 import { spawn } from 'child_process';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { BrowserWindow, app, ipcMain, dialog } from 'electron';
 import { Platform } from '_/types/platform';
 import fs from 'fs';
@@ -23,8 +18,8 @@ const corePath = () => {
   let cPath = path.resolve(`core/${platform()}/react-background-service.exe`);
   if (fs.existsSync(cPath)) return cPath;
 
-  // debug
-  cPath = path.resolve(`build-includes/core/${platform()}/react-background-service.exe`);
+  // debug, only windows
+  cPath = path.resolve(`react-background-service/bin/Debug/netcoreapp3.1/react-background-service.exe`);
   if (fs.existsSync(cPath)) return cPath;
   
   throw dialog.showErrorBox('CORE ERROR', 'core not found');

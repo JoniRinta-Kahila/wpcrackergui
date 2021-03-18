@@ -11,32 +11,35 @@ namespace react_background_service
         public int Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
+        public string Username { get; set; }
+        public string Wordlist { get; set; }
         public double Percentage { get; set; }
         public Result TaskResult { get; set; }
         public Status TaskStatus { get; set; }
+        public Options Options { get; set; }
+    }
+    
+    public enum Action
+    {
+        Add = 0,
+        Remove = 1,
+        Ping = 2,
+        Null = 3,
+    }
 
-        public enum Action
-        {
-            Add = 0,
-            Remove = 1,
-            Ping = 2,
-            Null = 3,
-        }
+    public enum Status
+    {
+        Stopped = 0,
+        Starting = 1,
+        Running = 2,
+        Ready = 3,
+    }
 
-        public enum Status
-        {
-            Stopped = 0,
-            Starting = 1,
-            Running = 2,
-            Ready = 3,
-        }
-
-        public enum Type
-        {
-            Enumeration = 0,
-            BruteForce = 1,
-            Null = 2,
-        }
+    public enum Type
+    {
+        Enumeration = 0,
+        BruteForce = 1,
+        Null = 2,
     }
 
     public class Result
@@ -61,8 +64,16 @@ namespace react_background_service
         public string Slug { get; set; }
     }
 
-    public class ProcessList
+    public class Options
     {
-        public readonly List<Task> Tasks = new List<Task>();
+        public BruteForceOptions BruteForceOptions { get; set; }
+    }
+
+    public class BruteForceOptions
+    {
+        public int MaxThreads { get; set; }
+        public int BatchCount { get; set; }
+        public int RetryCount { get; set; }
+        
     }
 }

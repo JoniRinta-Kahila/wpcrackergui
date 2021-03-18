@@ -35,6 +35,10 @@
       {
         "from": "./build-includes/",
         "to": "."
+      },
+      {
+        "from": "./options.json",
+        "to": "."
       }
     ],
     "buildVersion": "1"
