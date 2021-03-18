@@ -12,15 +12,24 @@ namespace react_background_service
 {
     class Program
     {
-        public static readonly List<Task> ProcessList = new List<Task>();
+        private static readonly List<Task> ProcessList = new List<Task>();
         
-        public static void SendStatus()
+        private static void SendStatus()
         {
             Console.WriteLine(JsonConvert.SerializeObject(ProcessList));
         }
-        
-        static System.Threading.Tasks.Task Main(string[] args)
+
+        private static void ReportTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            SendStatus();
+        }
+        
+        static System.Threading.Tasks.Task Main()
+        {
+            var reportTimer = new System.Timers.Timer {Interval = 10000};
+            reportTimer.Elapsed += ReportTimerElapsed;
+            reportTimer.Start();
+            
             while (true)
             {
                 var command = Console.ReadLine();
@@ -90,7 +99,7 @@ namespace react_background_service
                                 ProcessList[index].TaskStatus = Status.Ready;
                                 ProcessList[index].Percentage = 100;
 
-                                SendStatus();
+                                //SendStatus();
                             });
                             enumTask.Start();
                         }
@@ -119,10 +128,12 @@ namespace react_background_service
                                 var la = new LoginAttempt(new Uri(uri));
                                 using var sr = new StreamReader(wordListPath);
 
-                                void update(decimal percentage, long seconds)
+                                void Update(decimal percentage, long seconds)
                                 {
                                     var remaining = TimeSpan.FromSeconds(seconds);
                                     var progress = $"{percentage * 100:0.0000}";
+
+                                    process.Percentage = Convert.ToDouble(percentage * 100);
                                 }
 
                                 while (!sr.EndOfStream)
@@ -136,7 +147,7 @@ namespace react_background_service
                                     var percentage = (decimal)sr.BaseStream.Position / sr.BaseStream.Length;
                                     var percentsPerSecond = percentage / (decimal)watch.Elapsed.TotalSeconds;
                                     var remainingSeconds = (long)((1 - percentage) / percentsPerSecond);
-                                    update(percentage, remainingSeconds);
+                                    Update(percentage, remainingSeconds);
 
                                     Parallel.ForEach(buffer, new ParallelOptions { MaxDegreeOfParallelism = maxThreads }, password =>
                                     {
@@ -169,7 +180,7 @@ namespace react_background_service
                                 // Password not found!
 
                             });
-                            //bruteTask.Start();
+                            bruteTask.Start();
                         }
                     }
 
@@ -181,7 +192,7 @@ namespace react_background_service
 
                     if (action.MessageAction == Action.Ping)
                     {
-                        SendStatus();
+                        //SendStatus();
                     }
                 }
             }

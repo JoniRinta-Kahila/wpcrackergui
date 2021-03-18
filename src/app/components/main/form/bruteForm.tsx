@@ -16,20 +16,20 @@ const selectWordlist = () => {
   ipcRenderer.send('open-file-dialog-for-dir')
 }
 
-const newEnum = async (url: string, name: string, username: string, wordlist: string) => {
+const newBrute = async (url: string, name: string, username: string, wordlist: string, bc: number, mt: number, rc: number) => {
   console.log('Executed')
   const task: TxMessage = {
     MessageAction: MessageAction.Add,
-    TaskType: TaskType.Enumeration,
+    TaskType: TaskType.BruteForce,
     Name: name,
     Url: url,
     Username: username,
     WordList: wordlist,
     Options: {
       BruteForceOptions: {
-        BatchCount: 0,
-        MaxThreads: 0,
-        RetryCount: 0,
+        BatchCount: bc,
+        MaxThreads: mt,
+        RetryCount: rc,
       }
     }
   }
@@ -169,6 +169,14 @@ const BruteForm: React.FC<BruteFormProps> = () => {
         />
       </div>
     </div>
+    <Button 
+      variant="contained" 
+      color="primary"
+      style={{ margin: 8}}
+      onClick={() => newBrute(uri, procName, username, wordlist, batchC, threadC, retryC)}
+      >
+      Enumerate
+    </Button>
   </>
   )
 }

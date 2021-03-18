@@ -12,3 +12,4 @@ C:\WorkTEMP\wpcrackergui\react-background-service\obj\Debug\netcoreapp3.1\react-
 C:\WorkTEMP\wpcrackergui\react-background-service\obj\Debug\netcoreapp3.1\react-background-service.dll
 C:\WorkTEMP\wpcrackergui\react-background-service\obj\Debug\netcoreapp3.1\react-background-service.pdb
 C:\WorkTEMP\wpcrackergui\react-background-service\obj\Debug\netcoreapp3.1\react-background-service.genruntimeconfig.cache
+C:\WorkTEMP\wpcrackergui\react-background-service\obj\Debug\netcoreapp3.1\react-background-service.csprojAssemblyReference.cache

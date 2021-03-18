@@ -15,7 +15,6 @@ type ProcessInfoProps = {
 
 const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
   const procId = useParams<{ processId: string }>();
-  console.log(`id = ${procId.processId}`)
 
   const [currentProc, setCurrentProc] = useState<RxMessage>();
 
