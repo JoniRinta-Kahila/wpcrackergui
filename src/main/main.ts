@@ -27,6 +27,7 @@ const corePath = () => {
 
 const coreProcess = spawn(corePath());
 
+
 let mainWindow: Electron.BrowserWindow | null;
 
 function createWindow(): void {

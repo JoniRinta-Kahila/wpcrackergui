@@ -116,7 +116,7 @@ namespace react_background_service
 
                                 ProcessList[index].TaskStatus = Status.Running;
 
-                                var uri = process.Url;
+                                var uri = process.Url + "/wp-login.php";
                                 var username = process.Username;
                                 var wordListPath = process.Wordlist;
                                 var maxThreads = process.Options.BruteForceOptions.MaxThreads;
