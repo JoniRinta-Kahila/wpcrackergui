@@ -13,7 +13,7 @@ const FormSetter: React.FC<FormSetterProps> = ({ selectedForm, formSetter }) => 
         <InputLabel id="taskType">Attack type</InputLabel>
         <Select
           value={selectedForm}
-          style={{ margin: 8 }}
+          style={{ margin: 8, width: 250 }}
           defaultValue={0}
           onChange={(e) => formSetter(e.target.value as number)}
           margin="dense"
@@ -21,8 +21,7 @@ const FormSetter: React.FC<FormSetterProps> = ({ selectedForm, formSetter }) => 
           <MenuItem value={0}>User Enumeration</MenuItem>
           <MenuItem value={1}>Brute force</MenuItem>
         </Select>
-      </FormControl> <br/>
-      <hr />
+      </FormControl>
     </>
   )
 }

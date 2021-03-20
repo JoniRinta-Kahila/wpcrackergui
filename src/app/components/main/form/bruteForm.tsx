@@ -7,6 +7,8 @@ import validUrl from 'valid-url';
 import styles from './bruteForm.module.scss';
 import { bruteForceOtions } from '../../../../../options.json' 
 import { MessageAction, TaskType, TxMessage } from '_/types/message';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 type BruteFormProps = {
 
@@ -47,6 +49,8 @@ const BruteForm: React.FC<BruteFormProps> = () => {
   const [batchC, setBatchC] = useState<number>(bruteForceOtions.BatchCount);
   const [retryC, setRetryC] = useState<number>(bruteForceOtions.RetryCount);
 
+  const [advancedVisibility, setAdvancedVisibility] = useState(false);
+
 
   React.useEffect(() => {
     const listener = (event: Electron.IpcRendererEvent, response: string) => {
@@ -66,8 +70,6 @@ const BruteForm: React.FC<BruteFormProps> = () => {
   
   return (
     <>
-    <p>Brute Force currently not supported.</p>
-
     <TextField
       id="outlined-full-width"
       label="URL"
@@ -123,13 +125,21 @@ const BruteForm: React.FC<BruteFormProps> = () => {
       >
       Select Password Wordlist
     </Button> <br/>
-    <p style={{margin: 8}}>Brute Force currently not supported.</p> <br/>
 
     <div className={styles.advanced}>
-      <div className={styles.header}>
-        <p className={styles.content}>Advanced Options</p>
+      <div className={styles.header} onClick={() => setAdvancedVisibility(!advancedVisibility)}>
+        <p className={styles.content}>
+          Advanced Options
+          <span className={styles['content-icon']}>
+            {
+              advancedVisibility ?
+              <ArrowDropDownIcon /> :
+              <ArrowDropUpIcon /> 
+            }
+          </span>
+        </p>
       </div>
-      <div className={styles.options}>
+      <div className={advancedVisibility ? styles['options-visible'] : styles['options-hidden']}>
         <TextField
           id="standard-number"
           label="Max-Thread"
@@ -137,12 +147,12 @@ const BruteForm: React.FC<BruteFormProps> = () => {
           margin='dense'
           defaultValue={threadC}
           onChange={(e) => setThreadC(e.target.value as any as number)}
-          style={{paddingRight:'5px'}}
+          style={{paddingRight:'5px', width: 100}}
           InputLabelProps={{
             shrink: true,
           }}
         />
-        <p>{threadC}</p>
+        
         <TextField
           id="standard-number"
           label="Batch-Count"
@@ -150,7 +160,7 @@ const BruteForm: React.FC<BruteFormProps> = () => {
           margin='dense'
           defaultValue={batchC}
           onChange={(e) => setBatchC(e.target.value as any as number)}
-          style={{paddingRight:'5px'}}
+          style={{paddingRight:'5px', width: 100}}
           InputLabelProps={{
             shrink: true,
           }}
@@ -162,7 +172,7 @@ const BruteForm: React.FC<BruteFormProps> = () => {
           margin='dense'
           defaultValue={retryC}
           onChange={(e) => setRetryC(e.target.value as any as number)}
-          style={{paddingRight:'5px'}}
+          style={{paddingRight:'5px', width: 100}}
           InputLabelProps={{
             shrink: true,
           }}
@@ -175,7 +185,7 @@ const BruteForm: React.FC<BruteFormProps> = () => {
       style={{ margin: 8}}
       onClick={() => newBrute(uri, procName, username, wordlist, batchC, threadC, retryC)}
       >
-      Enumerate
+      Brute Force
     </Button>
   </>
   )

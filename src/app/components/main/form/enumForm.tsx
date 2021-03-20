@@ -4,6 +4,7 @@ import url from 'url';
 import validUrl from 'valid-url';
 import { MessageAction, TaskType, TxMessage } from '_/types/message';
 import { ipcRenderer } from 'electron';
+import styles from './enumForm.module.scss'; 
 
 type EnumFormProps = {
   
@@ -42,44 +43,46 @@ const EnumForm: React.FC<EnumFormProps> = () => {
   
   return (
     <>
-    <TextField
-      id="outlined-full-width"
-      label="URL"
-      style={{ margin: 8, width:'80%' }}
-      placeholder="Enter url"
-      onChange={(e) => setUri(e.target.value as string)}
-      // helperText=""
-      // fullWidth
-      margin="normal"
-      InputLabelProps={{
-        shrink: true,
-      }}
-      variant="outlined"
-    /> <br/>
+    <div className={styles.form}>
+      <TextField
+        id="outlined-full-width"
+        label="URL"
+        style={{ margin: 8, width:'80%' }}
+        placeholder="Enter url"
+        onChange={(e) => setUri(e.target.value as string)}
+        // helperText=""
+        // fullWidth
+        margin="normal"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="outlined"
+      /> <br/>
 
-    <TextField
-      id="outlined-full-width"
-      label="Process name"
-      style={{ margin: 8, width:'80%' }}
-      placeholder="Enter process name"
-      // helperText=""
-      value={procName}
-      onChange={(e) => setProcName(e.target.value)}
-      margin="normal"
-      InputLabelProps={{
-        shrink: true,
-      }}
-      variant="outlined"
-    /> <br/>
+      <TextField
+        id="outlined-full-width"
+        label="Process name"
+        style={{ margin: 8, width:'80%' }}
+        placeholder="Enter process name"
+        // helperText=""
+        value={procName}
+        onChange={(e) => setProcName(e.target.value)}
+        margin="normal"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="outlined"
+      /> <br/>
 
-    <Button 
-      variant="contained" 
-      color="primary"
-      style={{ margin: 8}}
-      onClick={() => newEnum(uri, procName)}
-      >
-      Enumerate
-    </Button>
+      <Button 
+        variant="contained" 
+        color="primary"
+        style={{ margin: 8, width: 350}}
+        onClick={() => newEnum(uri, procName)}
+        >
+        Enumerate
+      </Button>
+    </div>
     </>
   )
 }

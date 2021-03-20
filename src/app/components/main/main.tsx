@@ -22,8 +22,9 @@ const Main: React.FC<MainProps> = () => {
       <FormSetter selectedForm={taskType} formSetter={setTaskType} />
       {
         taskType === 0 ?
-        <EnumForm /> :
-        <BruteForm />
+          <EnumForm /> 
+        :
+          <BruteForm />
       }
     </div>
     </>
