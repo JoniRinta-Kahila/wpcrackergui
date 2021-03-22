@@ -9,6 +9,7 @@ import Header from './header';
 import EnumResult from './enumResult';
 import AddProcessBtn from './addProcessBtn';
 import { ipcRenderer } from 'electron';
+import BruteResult from './bruteResult';
 
 type ProcessInfoProps = {
   data : RxMessage[],
@@ -87,8 +88,14 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
         }
       </div>
     </section>
-
-    <EnumResult currentProc={currentProc} />
+    {
+      currentProc.TaskStatus === TaskStatus.Ready ?
+      (currentProc.TaskType === TaskType.BruteForce ?
+      <BruteResult currentProc={currentProc} /> :
+      <EnumResult currentProc = {currentProc} />)
+      : null
+    }
+    {/* <EnumResult currentProc={currentProc} /> */}
     <AddProcessBtn />
 
     </>

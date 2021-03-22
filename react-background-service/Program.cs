@@ -26,7 +26,7 @@ namespace react_background_service
         
         static System.Threading.Tasks.Task Main()
         {
-            var reportTimer = new System.Timers.Timer {Interval = 10000};
+            var reportTimer = new System.Timers.Timer {Interval = 2000};
             reportTimer.Elapsed += ReportTimerElapsed;
             reportTimer.Start();
             
@@ -169,6 +169,9 @@ namespace react_background_service
                                                 if (!la.LoginAttemptAsync(username, password).GetAwaiter().GetResult()) return;
                                                 // password found!
                                                 found = true;
+                                                process.TaskStatus = Status.Ready;
+                                                process.TaskResult.BruteForce.Password = password;
+                                                process.TaskResult.BruteForce.Username = username;
                                                 break;
                                             }
                                             // ToDo: [Brute Force Exception handler] Keep trying if the exception may be temporary. Stop trying if not.
@@ -186,7 +189,9 @@ namespace react_background_service
                                 }
 
                                 if (found) return;
-
+                                process.TaskStatus = Status.Ready;
+                                process.TaskResult.BruteForce.Username = username;
+                                process.TaskResult.BruteForce.Password = "Password not found";
                                 // Password not found!
 
                             });
