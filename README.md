@@ -59,6 +59,10 @@ npm start
 1. ```npm run prod```
 2. ```npm build:win```
 
+### Build project for MAC
+1. ```npm run prod```
+2. ```npm build:mac```
+
 <br><br>
 ## Notice
 In this article, "victim" refers to the attacked WordPress site in pentest lab. Attacking a WordPress site for which you do not have permission may be illegal.
