@@ -23,17 +23,23 @@
   left: 0;
   bottom: 0;
   right: 0;
+  width: 150px;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  transform: translate(-25%, 0%);
   font-size: 30px;
 }
 
 .container .progress {
   margin-left: 20px;
+  height: 100%;
+  width: 150px;
+}
+
+.container .progress-right {
+  margin-left: 220px;
   height: 100%;
   width: 300px;
 }

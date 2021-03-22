@@ -17,14 +17,15 @@ namespace react_background_service
         public Result TaskResult { get; set; }
         public Status TaskStatus { get; set; }
         public Options Options { get; set; }
+        public string Exception { get; set; }
     }
-    
+
     public enum Action
     {
         Add = 0,
         Remove = 1,
-        Ping = 2,
-        Null = 3,
+        Stop = 2,
+        Ping = 3,
     }
 
     public enum Status

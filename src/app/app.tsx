@@ -22,6 +22,22 @@ type AppProps = {
   
 }
 
+const taskBgColor = (status: TaskStatus) => {
+  if (status === TaskStatus.Running) return '#ca1dff';
+  if (status === TaskStatus.Stopped) return '#ff0000';
+  if (status === TaskStatus.Ready) return '#21ff00';
+  if (status === TaskStatus.Starting) return '#f7ff00';
+}
+
+const taskTxtColor = (status: TaskStatus) => {
+  if (status === TaskStatus.Running) return '#000000';
+  if (status === TaskStatus.Stopped) return '#000000';
+  if (status === TaskStatus.Ready) return '#000000';
+  if (status === TaskStatus.Starting) return '#000000';
+}
+
+let listUpdater = 0;
+
 const App: React.FC<AppProps> = ({}) => {
   const [processes, setProcesses] = React.useState<RxMessage[]>([]);
   
@@ -36,6 +52,7 @@ const App: React.FC<AppProps> = ({}) => {
 
   React.useEffect(() => {
     console.log(processes)
+    listUpdater++;
   }, [processes])
 
   return (
@@ -49,24 +66,19 @@ const App: React.FC<AppProps> = ({}) => {
               processes.map((task) => {
                 return (
                   <Link key={task.Id} to={`/${task.Id}`}>
-                  <li key={task.Id} style={{background: task.TaskType === TaskType.BruteForce ? '#ca1dff' : ''}}>
-                    {
-                      task.Status == TaskStatus.Starting ? <h1>Starting</h1> : 
-                      task.Status == TaskStatus.Ready ? <h1>Ready</h1> : 
-                      task.Status == TaskStatus.Stopped ? <h1>Stopped</h1> : 
-
-                      <Box className={styles.task}>
-                        <CircularProgress
-                          variant='determinate' 
-                          // color={task.Status === taskStatus.Stopped ? 'primary' : 'secondary'} 
-                          value={task.Percentage}
-                        />
-                        <Typography className={styles.progress} variant="caption" component="div">{`${Math.round(
-                          task.Percentage || 0,
-                          )}%`}</Typography>
-                      </Box>
-                    }
-                    <span className={styles.title}>{task.Name}</span>
+                    <li key={task.TaskStatus} style={{
+                      background: taskBgColor(task.TaskStatus!)
+                    }}>
+                    <Box className={styles.task}>
+                      <CircularProgress
+                        variant='determinate'
+                        value={task.Percentage}
+                      />
+                      <Typography style={{color: taskTxtColor(task.TaskStatus!)}} className={styles.progress} variant="caption" component="div">{`${Math.round(
+                        task.Percentage || 0,
+                        )}%`}</Typography>
+                    </Box>
+                    <span className={styles.title} style={{color: taskTxtColor(task.TaskStatus!)}}>{task.Name}</span>
                   </li>
                   </Link>
                 )

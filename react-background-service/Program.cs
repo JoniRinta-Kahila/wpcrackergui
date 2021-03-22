@@ -38,6 +38,13 @@ namespace react_background_service
                 {
                     var action = JsonConvert.DeserializeObject<Task>(command);
 
+                    if (action.MessageAction == Action.Stop)
+                    {
+                        var index = ProcessList.FindIndex(a => a.Id == action.Id);
+                        var process = ProcessList[index];
+                        process.TaskStatus = Status.Stopped;
+                    }
+
                     if (action.MessageAction == Action.Add)
                     {
                         var id = 1;
@@ -70,7 +77,8 @@ namespace react_background_service
                                     MaxThreads = action.Options.BruteForceOptions.MaxThreads,
                                     RetryCount = action.Options.BruteForceOptions.RetryCount,
                                 }
-                            }
+                            },
+                            
                         });
 
                         SendStatus();
@@ -88,7 +96,7 @@ namespace react_background_service
 
                                 var client = new HttpClient();
                                 var response = await client.GetAsync(process.Url + "/wp-json/wp/v2/users");
-                                response.EnsureSuccessStatusCode();
+                                response.EnsureSuccessStatusCode(); // ToDo: Handle 404
                                 var responseBody = await response.Content.ReadAsStringAsync();
                                 var list = JsonConvert.DeserializeObject<List<UserObj>>(responseBody);
 
@@ -109,8 +117,6 @@ namespace react_background_service
                         {
                             var bruteTask = new System.Threading.Tasks.Task(() =>
                             {
-                                // ToDo: [bruteTask Task Cancellation]
-
                                 var index = ProcessList.FindIndex(a => a.Id == id);
                                 var process = ProcessList[index];
 
@@ -138,6 +144,8 @@ namespace react_background_service
 
                                 while (!sr.EndOfStream)
                                 {
+                                    if (process.TaskStatus == Status.Stopped) break;
+                                    
                                     var buffer = new List<string>();
                                     for (var i = 0; i < batchCount; i++)
                                     {
@@ -154,6 +162,8 @@ namespace react_background_service
                                         var currentRetry = 0;
                                         for (; ; ) // retry pattern
                                         {
+                                            if (process.TaskStatus == Status.Stopped) break; // cancel task if messageAction was changed to stop
+                                            
                                             try
                                             {
                                                 if (!la.LoginAttemptAsync(username, password).GetAwaiter().GetResult()) return;
@@ -188,11 +198,6 @@ namespace react_background_service
                     {
                         var item = ProcessList.SingleOrDefault(x => x.Id == action.Id);
                         if (item != null) ProcessList.Remove(item);
-                    }
-
-                    if (action.MessageAction == Action.Ping)
-                    {
-                        //SendStatus();
                     }
                 }
             }

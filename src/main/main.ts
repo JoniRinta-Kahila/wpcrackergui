@@ -35,9 +35,9 @@ function createWindow(): void {
   mainWindow = new BrowserWindow({
     height: 600,
     width: 800,
-    maximizable: false,
+    // maximizable: false,
     minimizable: true,
-    resizable: false,
+    // resizable: false,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,

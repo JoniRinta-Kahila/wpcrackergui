@@ -24,7 +24,6 @@ Tested | 0 | X | 0 | 0 |
 - [ ] process the exception information sent by the backend.
 
 ##### Backend
-- [ ] task cancellations.
 - [ ] abort the process where the server responds with 400 etc.
 - [ ] sending exception information to the frontend.
 

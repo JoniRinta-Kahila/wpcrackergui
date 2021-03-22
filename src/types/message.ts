@@ -3,8 +3,8 @@ import { Options } from "./options"
 export enum MessageAction {
   Add = 0,
   Remove = 1,
-  Ping = 2,
-  Null = 3,
+  Stop = 2,
+  Ping = 3,
 }
 
 export enum TaskStatus {
@@ -47,12 +47,14 @@ export type RxMessage = {
   Url: string,
   Percentage: number,
   TaskResult?: Result,
-  Status?: TaskStatus,
+  TaskStatus?: TaskStatus,
+  Exception: string,
 }
 
 export type TxMessage = {
   MessageAction: MessageAction,
   TaskType: TaskType,
+  Id? : number,
   Url: string,
   Name: string,
   Username: string,
