@@ -14,7 +14,7 @@ work, please [file an issue](https://github.com/Devtography/electron-react-types
 #### Aim for cross-platform
 OS info | Win32 | Win64 | macOS | Linux
 ------------ | ----- | ----- | ----- | ----- |
-Backend | X | X | soon | soon |
+Backend | X | X | X | soon |
 FrontEnd | X | X | X | soon |
 Tested | 0 | X | 0 | 0 |
 

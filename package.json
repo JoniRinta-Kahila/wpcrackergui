@@ -10,8 +10,9 @@
     "test": "mocha -r ts-node/register -r tsconfig-paths/register \"test/**/*.ts\"",
     "cleanCore": "npx rimraf ./build-includes/core/",
     "winCoreBuild": "dotnet publish -c Release -r win-x64 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/Win64/ && dotnet publish -c Release -r win-x86 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/Win32/",
+    "macCoreBuild": "dotnet publish -c Release -r osx-x64 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/OSX/",
     "build:win": "npm run cleanCore && npm run winCoreBuild && electron-builder build --win",
-    "build:mac": "electron-builder build --mac --x64"
+    "build:mac": "electron-builder build --mac --x64 && npm run macCoreBuild"
   },
   "build": {
     "appId": "com.rintsi.wpcracker_gui",

@@ -7,21 +7,47 @@ import fs from 'fs';
 
 const platform = () => {
   const pf = process.platform;
-  if (pf === "win32") {
+  if (pf === 'win32') {
     return process.arch === 'x64' ? Platform.Win64 : Platform.Win32;
   }
-  throw dialog.showErrorBox('OS ERROR', `OS ${pf} is not currently supported.`);
+  if (pf === 'darwin') {
+    return Platform.Darwin;
+  }
+  if (pf === 'linux') {
+    return Platform.Linux;
+  }
+  throw dialog.showErrorBox('OS ERROR', `${pf} is not currently supported.`);
 }
 
 const corePath = () => {
-  // release
-  let cPath = path.resolve(`core/${platform()}/react-background-service.exe`);
-  if (fs.existsSync(cPath)) return cPath;
+  const pf = platform();
+  let cPath: string;
 
-  // debug, only windows
-  cPath = path.resolve(`react-background-service/bin/Debug/netcoreapp3.1/react-background-service.exe`);
-  if (fs.existsSync(cPath)) return cPath;
-  
+  // windows
+  if (pf === Platform.Win32 || pf === Platform.Win64) {
+    
+    // release
+    cPath = path.resolve(`core/${platform()}/react-background-service.exe`);
+    if (fs.existsSync(cPath)) return cPath;
+
+    // debug
+    cPath = path.resolve(`react-background-service/bin/Debug/netcoreapp3.1/react-background-service.exe`);
+    if (fs.existsSync(cPath)) return cPath;
+  }
+
+  // osx release
+  if (pf === Platform.Darwin) {
+
+    // release
+    cPath = path.resolve(`core/${platform()}/react-background-service`);
+    if (fs.existsSync(cPath)) return cPath;
+
+    // debug
+    cPath = path.resolve(`react-background-service/bin/Debug/netcoreapp3.1/react-background-service`);
+    if (fs.existsSync(cPath)) return cPath;
+    throw dialog.showErrorBox('CORE ERROR', 'If you use debug version, correct the backend path in main.ts, row 46');
+  }
+
   throw dialog.showErrorBox('CORE ERROR', 'core not found');
 }
 
