@@ -20,7 +20,6 @@ Tested | 0 | X | 0 | 0 |
 
 ### Next steps
 ##### FronEnd
-- [ ] if necessary, send the process cancellation token to backend.
 - [ ] process the exception information sent by the backend.
 
 ##### Backend
