@@ -179,7 +179,7 @@ namespace react_background_service
                                             {
                                                 currentRetry++;
 
-                                                if (currentRetry > retryCount) break; // not work, stop trying
+                                                if (currentRetry > retryCount) break; // not work, stop trying.
                                                 Thread.Sleep(1000 * currentRetry);
                                             }
                                         }
@@ -189,10 +189,13 @@ namespace react_background_service
                                 }
 
                                 if (found) return;
-                                process.TaskStatus = Status.Ready;
+
+                                // Password not found or process cancelled.
+                                if (process.TaskStatus != Status.Stopped)
+                                    process.TaskStatus = Status.Ready;
+
                                 process.TaskResult.BruteForce.Username = username;
                                 process.TaskResult.BruteForce.Password = "Password not found";
-                                // Password not found!
 
                             });
                             bruteTask.Start();
