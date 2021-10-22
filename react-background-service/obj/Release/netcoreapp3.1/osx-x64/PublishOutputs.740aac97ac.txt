@@ -1,6 +1,0 @@
-C:\Users\joniR\Desktop\wpc-backTest\react-background-service
-C:\Users\joniR\Desktop\wpc-backTest\react-background-service.dll
-C:\Users\joniR\Desktop\wpc-backTest\react-background-service.deps.json
-C:\Users\joniR\Desktop\wpc-backTest\react-background-service.runtimeconfig.json
-C:\Users\joniR\Desktop\wpc-backTest\react-background-service.pdb
-C:\Users\joniR\Desktop\wpc-backTest\Newtonsoft.Json.dll

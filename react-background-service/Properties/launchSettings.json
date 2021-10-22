@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "react-background-service": {
-      "commandName": "Project",
-      "remoteDebugEnabled": false
-    }
-  }
-}
