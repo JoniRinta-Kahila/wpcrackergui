@@ -32,11 +32,13 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     },
-    "extraFiles": [
+    "extraResources": [
       {
-        "from": "./build-includes/",
-        "to": "."
-      },
+        "from": "./build-includes/core",
+        "to": "core"
+      }
+    ],
+    "extraFiles": [
       {
         "from": "./options.json",
         "to": "."
