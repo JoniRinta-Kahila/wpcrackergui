@@ -27,19 +27,19 @@ const dataPath =
 const corePath = () => {
   const pf = platform();
   let cPath: string;
-  console.log('NODE_ENV:', process.env.NODE_ENV);
-  console.log('DATAPATH:', dataPath);
-  // windows
+
+  // Windows
   if (pf === Platform.Win32 || pf === Platform.Win64) {
     cPath = path.resolve(`${dataPath}/core/${platform()}/react-background-service.exe`);
     if (fs.existsSync(cPath)) return cPath;
     throw dialog.showErrorBox('CORE ERROR', 'core not found, fix core path in main.ts, row 34');
   }
 
-  // osx release
+  // OSX
   if (pf === Platform.Darwin) {
-    cPath = path.resolve(`${dataPath}/core/OSX/react-background-service`)
-    throw dialog.showErrorBox('CORE ERROR', 'core not found, fix core path in main.ts, row 46');
+    cPath = path.resolve(`${dataPath}/core/OSX/react-background-service`);
+    if (fs.existsSync(cPath)) return cPath;
+    throw dialog.showErrorBox('CORE ERROR', 'core not found, fix core path in main.ts, row 41');
   }
 
   throw dialog.showErrorBox('OS ERROR', 'OS NOT SUPPORTED');

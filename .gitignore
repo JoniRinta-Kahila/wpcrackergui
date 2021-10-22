@@ -3,8 +3,9 @@
 dist/
 node_modules/
 out/
-react-background-service/
 build-includes/
+react-background-service/bin/
+react-background-service/obj/
 
 # Logs
 logs

@@ -1,0 +1,6 @@
+C:\WorkTEMP\wpcrackergui\build-includes\Win64\react-background-service.exe
+C:\WorkTEMP\wpcrackergui\build-includes\Win64\react-background-service.dll
+C:\WorkTEMP\wpcrackergui\build-includes\Win64\react-background-service.deps.json
+C:\WorkTEMP\wpcrackergui\build-includes\Win64\react-background-service.runtimeconfig.json
+C:\WorkTEMP\wpcrackergui\build-includes\Win64\react-background-service.pdb
+C:\WorkTEMP\wpcrackergui\build-includes\Win64\Newtonsoft.Json.dll

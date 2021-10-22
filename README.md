@@ -16,7 +16,7 @@ OS info | Win32 | Win64 | macOS | Linux
 ------------ | ----- | ----- | ----- | ----- |
 Backend | X | X | X | soon |
 FrontEnd | X | X | X | soon |
-Tested | 0 | X | 0 | 0 |
+Tested | 0 | X | X | 0 |
 
 ### Next steps
 ##### FronEnd
@@ -25,6 +25,9 @@ Tested | 0 | X | 0 | 0 |
 ##### Backend
 - [ ] abort the process where the server responds with 400 etc.
 - [ ] sending exception information to the frontend.
+
+### Requirements
+.NET Core 3.1
 
 ### Using
 

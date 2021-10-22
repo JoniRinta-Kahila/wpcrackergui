@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "mc0Yx/gNuSw65kUhw09IHAubGm+fppjBKUHPbhZVI/banWTC3ZIzUQCs+1k7nlioRizlfD+QnhAXAA4PDBVPPQ==",
+  "success": true,
+  "projectFilePath": "/Users/jonirinta-kahila/Documents/electron/wpcrackergui/react-background-service/react-background-service.csproj",
+  "expectedPackageFiles": [
+    "/Users/jonirinta-kahila/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
