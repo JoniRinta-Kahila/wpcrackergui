@@ -12,7 +12,7 @@
         }
       }
     },
-    ".NETCoreApp,Version=v3.1/osx-x64": {
+    ".NETCoreApp,Version=v3.1/win-x86": {
       "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
@@ -63,24 +63,34 @@
     ]
   },
   "packageFolders": {
-    "/Users/jonirinta-kahila/.nuget/packages/": {}
+    "C:\\Users\\joniR\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jonirinta-kahila/Documents/electron/wpcrackergui/react-background-service/react-background-service.csproj",
+      "projectUniqueName": "C:\\Work\\wpcrackergui\\react-background-service\\react-background-service.csproj",
       "projectName": "react-background-service",
-      "projectPath": "/Users/jonirinta-kahila/Documents/electron/wpcrackergui/react-background-service/react-background-service.csproj",
-      "packagesPath": "/Users/jonirinta-kahila/.nuget/packages/",
-      "outputPath": "/Users/jonirinta-kahila/Documents/electron/wpcrackergui/react-background-service/obj/",
+      "projectPath": "C:\\Work\\wpcrackergui\\react-background-service\\react-background-service.csproj",
+      "packagesPath": "C:\\Users\\joniR\\.nuget\\packages\\",
+      "outputPath": "C:\\Work\\wpcrackergui\\react-background-service\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "/Users/jonirinta-kahila/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\joniR\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -119,11 +129,11 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
-      "osx-x64": {
+      "win-x86": {
         "#import": []
       }
     }

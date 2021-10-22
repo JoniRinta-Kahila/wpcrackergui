@@ -18,6 +18,7 @@
     "appId": "com.rintsi.wpcracker_gui",
     "productName": "WPCracker-GUI",
     "directories": {
+      "buildResources": "resources",
       "app": "./dist/",
       "output": "./out/"
     },
@@ -26,11 +27,17 @@
     },
     "win": {
       "target": "nsis",
-      "asar": true
+      "asar": true,
+      "icon": "resources/icon/wpcracker.png"
     },
     "nsis": {
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "resources/icon/wpcracker.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "WPCracker",
+      "deleteAppDataOnUninstall": true
     },
     "extraResources": [
       {

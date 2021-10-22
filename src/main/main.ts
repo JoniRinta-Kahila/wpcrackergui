@@ -1,9 +1,16 @@
 import * as path from 'path';
 import * as url from 'url';
 import { spawn } from 'child_process';
-import { BrowserWindow, app, ipcMain, dialog } from 'electron';
+import {
+  BrowserWindow,
+  app,
+  ipcMain,
+  dialog,
+  Menu,
+} from 'electron';
 import { Platform } from '_/types/platform';
 import fs from 'fs';
+import { ApplicationMenu } from '_/menu/applicationMenu';
 
 const platform = () => {
   const pf = process.platform;
@@ -32,14 +39,14 @@ const corePath = () => {
   if (pf === Platform.Win32 || pf === Platform.Win64) {
     cPath = path.resolve(`${dataPath}/core/${platform()}/react-background-service.exe`);
     if (fs.existsSync(cPath)) return cPath;
-    throw dialog.showErrorBox('CORE ERROR', 'core not found, fix core path in main.ts, row 34');
+    throw dialog.showErrorBox('core_not_found main.ts:42', cPath);
   }
 
   // OSX
   if (pf === Platform.Darwin) {
     cPath = path.resolve(`${dataPath}/core/OSX/react-background-service`);
     if (fs.existsSync(cPath)) return cPath;
-    throw dialog.showErrorBox('CORE ERROR', 'core not found, fix core path in main.ts, row 41');
+    throw dialog.showErrorBox('core_not_found main.ts:47', cPath);
   }
 
   throw dialog.showErrorBox('OS ERROR', 'OS NOT SUPPORTED');
@@ -73,6 +80,8 @@ function createWindow(): void {
       slashes: true,
     }),
   ).finally(() => {});
+
+  Menu.setApplicationMenu(ApplicationMenu);
   
   ipcMain.on('ping', (event, message: string) => {
     coreProcess.stdin.write(`${message}\n`);

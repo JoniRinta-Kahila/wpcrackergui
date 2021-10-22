@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mc0Yx/gNuSw65kUhw09IHAubGm+fppjBKUHPbhZVI/banWTC3ZIzUQCs+1k7nlioRizlfD+QnhAXAA4PDBVPPQ==",
+  "dgSpecHash": "YtrI1IOphKdLj9rzoZSUuPTaqX+UYJCXj6WwnMH45wWqmZC7qcyu7zzMzZ3atpJSdQHT3xSKC7I1jvnQYsS+Ag==",
   "success": true,
-  "projectFilePath": "/Users/jonirinta-kahila/Documents/electron/wpcrackergui/react-background-service/react-background-service.csproj",
+  "projectFilePath": "C:\\Work\\wpcrackergui\\react-background-service\\react-background-service.csproj",
   "expectedPackageFiles": [
-    "/Users/jonirinta-kahila/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\joniR\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }
