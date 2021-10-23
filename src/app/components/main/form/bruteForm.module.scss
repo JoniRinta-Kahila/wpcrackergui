@@ -1,26 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .advanced {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  text-align: center;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  text-align: center;
   margin-top: 20px;
 }
 
-.advanced .header {
+.advanced .btnAdvanced {
   width: 80%;
-  height: 60px;
-  background: linear-gradient(0deg, rgba(240,255,255,1) 0%, rgba(108,182,182,1) 40%, rgba(97,176,176,1) 59%, rgba(240,255,255,1) 100%);
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  text-align: center;
-  cursor: pointer;
 }
 
-.advanced .header .content {
+.advanced .btnAdvanced .content {
   flex: 0 0 120px;
-  line-height: 60px;
-  color: black;
+  color: rgb(54, 54, 54);
   font-size: 18px;
   font-weight: 700;
   white-space: nowrap;
@@ -29,8 +33,29 @@
 
 .options-visible {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .options-hidden {
   display: none;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.textField {
+  color: white !important;
+}
+.textField label {
+  color: red !important;
+}
+
+.buttons .btnSetWordlist {
+  white-space: nowrap
 }
