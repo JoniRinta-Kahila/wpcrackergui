@@ -18,6 +18,7 @@ import {
 import ProcessInfo from './components/processInfo/processInfo';
 import Main from './components/main/main';
 import { useDarkmodeContext } from './context/darkmodeContextProvider';
+import AddProcessBtn from './components/processInfo/addProcessBtn';
 
 type AppProps = {
   
