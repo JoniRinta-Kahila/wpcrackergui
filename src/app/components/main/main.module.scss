@@ -1,14 +1,25 @@
-.header {
-  width: 100%;
-  background: azure;
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.container h1 {
+  color: azure;
+  margin: 20px;
   text-align: center;
 }
 
-.form {
-  width: 100%;
+.container .formSetter {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.container .form {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px 0;
 }

@@ -17,6 +17,7 @@ import {
 } from 'react-router-dom';
 import ProcessInfo from './components/processInfo/processInfo';
 import Main from './components/main/main';
+import { useDarkmodeContext } from './context/darkmodeContextProvider';
 
 type AppProps = {
   
@@ -40,6 +41,7 @@ let listUpdater = 0;
 
 const App: React.FC<AppProps> = ({}) => {
   const [processes, setProcesses] = React.useState<RxMessage[]>([]);
+  const { setUseDarkmode, useDarkmode } = useDarkmodeContext();
   
   React.useEffect(() => {
     const listener = (event: Electron.IpcRendererEvent, response: string) => {
@@ -56,7 +58,7 @@ const App: React.FC<AppProps> = ({}) => {
   }, [processes])
 
   return (
-    <Router>    
+    <Router>
       <div className={styles.wrapper}>
         <div className={styles.sidebar}>
 

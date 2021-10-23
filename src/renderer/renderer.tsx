@@ -7,7 +7,11 @@ import '_public/style.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from '../app/app';
+import DarkmodeContextProvider from '_/app/context/darkmodeContextProvider';
 
 ReactDOM.render(
-<App/>, document.getElementById('app'));
+  <DarkmodeContextProvider>
+    <App/>
+  </DarkmodeContextProvider>
+, document.getElementById('app'));
 
