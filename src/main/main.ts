@@ -66,6 +66,7 @@ function createWindow(): void {
     minimizable: true,
     // resizable: false,
     webPreferences: {
+      contextIsolation: false,
       nodeIntegration: true,
       webSecurity: false,
       devTools: process.env.NODE_ENV !== 'production',
