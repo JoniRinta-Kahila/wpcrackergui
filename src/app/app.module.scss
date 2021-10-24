@@ -77,3 +77,23 @@
   color: #717171;
   border-bottom: 1px solid #e0e4e8;
 }
+
+.linkToMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 5px;
+  height: 45px;
+  width: 45px;
+  border-radius: calc(45px / 2);
+  background: green;
+  cursor: pointer;
+  color: inherit;
+}
+
+.linkToMain:hover {
+  color: #fff;
+}

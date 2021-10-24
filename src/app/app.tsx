@@ -6,7 +6,6 @@ import { ipcRenderer } from 'electron';
 import {
   RxMessage,
   TaskStatus,
-  TaskType,
 } from '_/types/message';
 import styles from './app.module.scss';
 import {
@@ -18,7 +17,7 @@ import {
 import ProcessInfo from './components/processInfo/processInfo';
 import Main from './components/main/main';
 import { useDarkmodeContext } from './context/darkmodeContextProvider';
-import AddProcessBtn from './components/processInfo/addProcessBtn';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 type AppProps = {
   
@@ -88,6 +87,15 @@ const App: React.FC<AppProps> = ({}) => {
               })
             }
           </ul>
+
+          {/* add new proccess button */}
+          <Link
+            to='/'
+            className={styles.linkToMain}
+          >
+            <AiOutlinePlus size={25} />
+          </Link>
+
         </div>
         <div className={styles.main}>
           <Switch>

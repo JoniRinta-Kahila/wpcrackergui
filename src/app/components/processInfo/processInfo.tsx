@@ -7,7 +7,6 @@ import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Header from './header';
 import EnumResult from './enumResult';
-import AddProcessBtn from './addProcessBtn';
 import { ipcRenderer } from 'electron';
 import BruteResult from './bruteResult';
 
@@ -98,7 +97,6 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
         <EnumResult currentProc = {currentProc} />)
         : null
       }
-      <AddProcessBtn />
     </section>
   )
 }
