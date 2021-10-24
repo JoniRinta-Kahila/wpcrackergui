@@ -41,6 +41,8 @@ let listUpdater = 0;
 
 const App: React.FC<AppProps> = ({}) => {
   const [processes, setProcesses] = React.useState<RxMessage[]>([]);
+
+  // TODO add themes
   const { setUseDarkmode, useDarkmode } = useDarkmodeContext();
   
   React.useEffect(() => {
