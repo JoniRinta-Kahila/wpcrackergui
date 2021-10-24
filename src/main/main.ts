@@ -68,7 +68,7 @@ function createWindow(): void {
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,
-      webSecurity: false,
+      webSecurity: true,
       devTools: process.env.NODE_ENV !== 'production',
     },
   });
