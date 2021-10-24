@@ -46,7 +46,6 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
   }, [procId])
 
   return ( !currentProc?.Id ? <h1>Error, Process id not found!</h1> :
-    <>
     <section className={styles.container}>
       <Header currentProc={currentProc}/>
       <div className={styles.progStatus}>
@@ -99,11 +98,8 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
         <EnumResult currentProc = {currentProc} />)
         : null
       }
+      <AddProcessBtn />
     </section>
-    {/* <EnumResult currentProc={currentProc} /> */}
-    <AddProcessBtn />
-
-    </>
   )
 }
 

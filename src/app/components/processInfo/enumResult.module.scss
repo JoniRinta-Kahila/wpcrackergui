@@ -1,58 +1,30 @@
-.collapsible {
-  background-color: greenyellow;
+.container {
+  padding: 15px;
+  background: #0D1117;
+  border: 1px solid azure;
+  height: 100%;
+  overflow-y: auto;
 }
 
-.collapsible .Collapsible__contentInner {
+.collapsibleContentInner {
   padding: 10px;
-  border: 1px solid $lightGrey;
+  border: 1px solid rgb(129, 94, 94);
+  background: lightgrey;
   border-top: 0;
-
-  p {
-    margin-bottom: 10px;
-    font-size: 14px;
-    line-height: 20px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
 }
 
-.collapsible .Collapsible__contentInner .Collapsible__trigger {
+.collapsibleTrigger {
   display: block;
   font-weight: 400;
   text-decoration: none;
-  color: $grey;
   position: relative;
   border: 1px solid white;
-  padding: 10px;
-  background: $cyan;
+  padding: 5px;
+  background: lightseagreen;
   color: white;
-
-
-  &:after {
-    font-family: 'FontAwesome';
-    content: '\f107';
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    display: block;
-    transition: transform 300ms;
-  }
-
-  &.is-open {
-    &:after {
-      transform: rotateZ(180deg);
-    }
-  }
-
-  &.is-disabled {
-    opacity: 0.5;
-    background-color: grey;
-  }
 }
 
-.section {
-  padding: 15px;
-  background: azure;
+.resultInfo {
+  margin: 10px 0;
+  color: lightseagreen;
 }

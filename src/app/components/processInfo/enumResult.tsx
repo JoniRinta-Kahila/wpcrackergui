@@ -8,16 +8,29 @@ type EnumResultProps = {
 }
 
 const EnumResult: React.FC<EnumResultProps> = ({ currentProc }) => {
+
   return (
-    <section className={styles.section}>
+    <section className={styles.container}>
     {
-      currentProc.TaskResult?.UserEnumeration ?
+      currentProc.TaskResult?.UserEnumeration
+      ?
       <>
-      <span><h3>Result </h3> Click usernames to expand for more information</span><br/>
+      <div className={styles.resultInfo}>
+        <h3>Result</h3>
+        <p>Click slugs to expand for more information</p>
+      </div>
       {
         currentProc.TaskResult.UserEnumeration.map(user => {
           return(
-            <Collapsible key={user.Id} tabIndex={0} trigger={user.Slug ?? user.Id} className={styles.collapsible}>
+            <Collapsible
+              key={user.Id}
+              tabIndex={0}
+              trigger={user.Slug ?? user.Id}
+              className={styles.collapsible}
+              triggerClassName={styles.collapsibleTrigger}
+              openedClassName={styles.collapsibleTrigger}
+              contentInnerClassName={styles.collapsibleContentInner}
+            >
               <p>ID:............. {user.Id}</p>
               <p>NAME:........... {user.Name}</p>
               <p>DESCRIPTION:.... {user.Description}</p>
@@ -27,8 +40,7 @@ const EnumResult: React.FC<EnumResultProps> = ({ currentProc }) => {
               <p>-----------------</p>
               <br/>
             </Collapsible>
-            // ToDo
-            // make button for save innerHTML from this element to file.
+            // TODO make button for save innerHTML from this element to file.
           )
         })
       }
