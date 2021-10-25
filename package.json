@@ -1,7 +1,7 @@
 {
   "name": "wpcrackergui",
-  "version": "0.1.0",
-  "description": "WordPress user enumeration and brute force tool",
+  "version": "0.2.0",
+  "description": "WordPress user enumeration and brute force tool for pentest",
   "main": "./dist/main.bundle.js",
   "scripts": {
     "start": "electron ./dist/main.bundle.js",
@@ -23,7 +23,13 @@
       "output": "./out/"
     },
     "mac": {
-      "target": "dmg"
+      "target": "dmg",
+      "icon": "resources/icon/wpcracker.icns",
+      "category": "public.app-category.developer-tools"
+    },
+    "dmg": {
+      "icon": "resources/icon/wpcracker.icns",
+      "title": "WPCracker ${version}"
     },
     "win": {
       "target": "nsis",
@@ -36,7 +42,7 @@
       "installerIcon": "resources/icon/wpcracker.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "WPCracker",
+      "shortcutName": "WPCracker ${version}",
       "deleteAppDataOnUninstall": true
     },
     "extraResources": [
@@ -53,7 +59,7 @@
     ],
     "buildVersion": "1"
   },
-  "author": "Joni Rinta-Kahila @JoniRinta-Kahila",
+  "author": "Joni Rinta-Kahila (https://rints.in)",
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -108,11 +114,14 @@
     "url": "git+https://github.com/JoniRinta-Kahila/wpcrackergui"
   },
   "keywords": [
-    "boilerplate",
     "Electron",
     "React",
     "Typescript",
-    "Webpack"
+    "Windows",
+    "MAC",
+    "Wordpress",
+    "csharp",
+    "pentesting"
   ],
   "bugs": {
     "url": "https://github.com/JoniRinta-Kahila/wpcrackergui/issues"
