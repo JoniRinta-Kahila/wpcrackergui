@@ -39,7 +39,7 @@ const corePath = () => {
   if (pf === Platform.Win32 || pf === Platform.Win64) {
     cPath = path.resolve(`${dataPath}/core/${platform()}/react-background-service.exe`);
     if (fs.existsSync(cPath)) return cPath;
-    throw dialog.showErrorBox('core_not_found main.ts:42', cPath);
+    throw dialog.showErrorBox('core_not_found main.ts:40', cPath);
   }
 
   // OSX
@@ -47,6 +47,13 @@ const corePath = () => {
     cPath = path.resolve(`${dataPath}/core/OSX/react-background-service`);
     if (fs.existsSync(cPath)) return cPath;
     throw dialog.showErrorBox('core_not_found main.ts:47', cPath);
+  }
+
+  // Linux
+  if (pf === Platform.Linux) {
+    cPath = path.resolve(`${dataPath}/core/Linux/react-background-service`);
+    if (fs.existsSync(cPath)) return cPath;
+    throw dialog.showErrorBox('core_not_found main.ts:54', cPath);
   }
 
   throw dialog.showErrorBox('OS ERROR', 'OS NOT SUPPORTED');
