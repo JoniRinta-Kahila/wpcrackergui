@@ -58,13 +58,16 @@ Run dev:
 npm start
 ```
 
-### Build project for Windows x32 & x64
+### Build project for Windows x32 & x64 
 1. ```npm run prod```
 2. ```npm build:win```
 
 ### Build project for MAC
 1. ```npm run prod```
 2. ```npm build:mac```
+
+## Build project for Linux
+https://github.com/electron-userland/electron-build-service/issues/9#issuecomment-704069238
 
 <br><br>
 ## Notice
