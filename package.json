@@ -9,10 +9,12 @@
     "prod": "rimraf dist && cross-env NODE_ENV=production webpack --progress --color",
     "test": "mocha -r ts-node/register -r tsconfig-paths/register \"test/**/*.ts\"",
     "cleanCore": "npx rimraf ./build-includes/core/",
+    "linuxCoreBuild": "dotnet publish -c Release -r linux-x64 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/linux/ ",
     "winCoreBuild": "dotnet publish -c Release -r win-x64 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/Win64/ && dotnet publish -c Release -r win-x86 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/Win32/",
     "macCoreBuild": "dotnet publish -c Release -r osx-x64 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/OSX/",
     "build:win": "npm run cleanCore && npm run winCoreBuild && electron-builder build --win",
-    "build:mac": "npm run cleanCore && npm run macCoreBuild && electron-builder build --mac --x64"
+    "build:mac": "npm run cleanCore && npm run macCoreBuild && electron-builder build --mac --x64",
+    "build:linux": "npm run cleanCore && npm run linuxCoreBuild && electron-builder build --linux deb tar.xz"
   },
   "build": {
     "appId": "com.rintsi.wpcracker_gui",
@@ -31,6 +33,13 @@
       "icon": "resources/icon/wpcracker.icns",
       "title": "WPCracker ${version}"
     },
+    "linux": {
+      "target": "deb",
+      "icon": "resources/icon/wpcracker.png",
+      "synopsis": "Wordpress pentest tool",
+      "category": "Development"
+    },
+    "deb": {},
     "win": {
       "target": "nsis",
       "asar": true,
@@ -59,7 +68,6 @@
     ],
     "buildVersion": "1"
   },
-  "author": "Joni Rinta-Kahila (https://rints.in)",
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -112,6 +120,11 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JoniRinta-Kahila/wpcrackergui"
+  },
+  "author": {
+    "name": "Joni Rinta-Kahila",
+    "email": "joni.rinta-kahila@rints.in",
+    "url": "https://rints.in"
   },
   "keywords": [
     "Electron",
