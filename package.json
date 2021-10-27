@@ -1,6 +1,6 @@
 {
   "name": "wpcrackergui",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "WordPress user enumeration and brute force tool for pentest",
   "main": "./dist/main.bundle.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "prod": "rimraf dist && cross-env NODE_ENV=production webpack --progress --color",
     "test": "mocha -r ts-node/register -r tsconfig-paths/register \"test/**/*.ts\"",
     "cleanCore": "npx rimraf ./build-includes/core/",
-    "linuxCoreBuild": "dotnet publish -c Release -r linux-x64 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/Linux/ ",
+    "linuxCoreBuild": "dotnet publish -c Release -r linux-x64 --self-contained true --framework netcoreapp3.1 -o ./build-includes/core/Linux/",
     "winCoreBuild": "dotnet publish -c Release -r win-x64 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/Win64/ && dotnet publish -c Release -r win-x86 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/Win32/",
     "macCoreBuild": "dotnet publish -c Release -r osx-x64 --self-contained false --framework netcoreapp3.1 -o ./build-includes/core/OSX/",
     "build:win": "npm run cleanCore && npm run winCoreBuild && electron-builder build --win",
