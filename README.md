@@ -14,13 +14,6 @@ Backend | X | X | X | X |
 FrontEnd | X | X | X | X |
 Tested | 0 | X | X | deb11 |
 
-### TODO
-- FronEnd
-    - [ ] process the exception information sent by the backend.
-- Backend
-    - [ ] abort the process where the server responds with 400 etc.
-    - [ ] sending exception information to the frontend.
-
 ### Requirements
 .NET Core 3.1
 

