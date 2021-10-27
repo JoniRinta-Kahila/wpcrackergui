@@ -122,7 +122,7 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
           </div>
         </div>
       </div>
-      {
+      { // resolve the results to be presented
         currentProc.TaskStatus === TaskStatus.Ready ?
         (currentProc.TaskType === TaskType.BruteForce ?
         <BruteResult currentProc={currentProc} /> :
