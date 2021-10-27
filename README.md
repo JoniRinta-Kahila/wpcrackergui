@@ -67,7 +67,21 @@ npm start
 2. ```npm build:mac```
 
 ## Build project for Linux
+
+### Build for linux with with docker
 https://github.com/electron-userland/electron-build-service/issues/9#issuecomment-704069238
+https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian
+
+1. open terminal at root of project
+  1.1 run command `npm run prod`
+  1.2 run command `npm run cleanCore && npm run linuxCoreBuild`
+2. start docker
+  2.1 run command `docker pull electronuserland/builder` (do this only the first time)
+  2.2 run command `docker run --rm -ti -v C:\Work\wpcrackergui\:/project -w /project electronuserland/builder` (correct the project path if needed)
+  2.3 run command `npm i -g electron-builder`
+  2.4 run command `cd /project`
+  2.5 run command `electron-builder build --linux deb tar.xz`
+3. after build is ready, you can locate the build files in the wpcrackergui/out directory
 
 <br><br>
 ## Notice
