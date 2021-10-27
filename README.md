@@ -7,10 +7,6 @@ With the Brute Force tool, you can control how aggressive an attack you want to 
 
 ---
 
-The frontend has been implemented with [Electron-React-TypeScript-Webpack-Boilerplate](https://github.com/Devtography/electron-react-typescript-webpack-boilerplate).
-This boilerplate currently works on macOS and Windows. If something doesn't 
-work, please [file an issue](https://github.com/Devtography/electron-react-typescript-webpack-boilerplate/issues/new).
-
 #### Aim for cross-platform
 OS info | Win32 | Win64 | macOS | Linux
 ------------ | ----- | ----- | ----- | ----- |
@@ -18,13 +14,12 @@ Backend | X | X | X | X |
 FrontEnd | X | X | X | X |
 Tested | 0 | X | X | deb11 |
 
-### Next steps
-##### FronEnd
-- [ ] process the exception information sent by the backend.
-
-##### Backend
-- [ ] abort the process where the server responds with 400 etc.
-- [ ] sending exception information to the frontend.
+### TODO
+- FronEnd
+    - [ ] process the exception information sent by the backend.
+- Backend
+    - [ ] abort the process where the server responds with 400 etc.
+    - [ ] sending exception information to the frontend.
 
 ### Requirements
 .NET Core 3.1
