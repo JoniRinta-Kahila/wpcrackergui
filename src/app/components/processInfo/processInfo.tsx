@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MessageAction, RxMessage, TaskStatus, TaskType, TxMessage } from '_/types/message';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from './processInfo.module.scss'
 import { Typography } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
@@ -15,7 +15,7 @@ type ProcessInfoProps = {
 }
 
 const sendTaskCancellation = async (id: number) => {
-  console.log('Cancel Executed')
+  console.log('Cancel Executed');
   const task: TxMessage = {
     MessageAction: MessageAction.Stop,
     TaskType: TaskType.Null,
@@ -29,11 +29,32 @@ const sendTaskCancellation = async (id: number) => {
         BatchCount: 0,
         MaxThreads: 0,
         RetryCount: 0,
-      }
-    }
-  }
+      },
+    },
+  };
   ipcRenderer.send('ping', JSON.stringify(task));
-}
+};
+
+const sendTaskRemoval = async (id: number) => {
+  console.log('Remove Executed');
+  const task: TxMessage = {
+    MessageAction: MessageAction.Remove,
+    TaskType: TaskType.Null,
+    Id: id,
+    Name: '',
+    Url: '',
+    Username: '',
+    WordList: '',
+    Options: {
+      BruteForceOptions: {
+        BatchCount: 0,
+        MaxThreads: 0,
+        RetryCount: 0,
+      },
+    },
+  };
+  ipcRenderer.send('ping', JSON.stringify(task));
+};
 
 const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
   const procId = useParams<{ processId: string }>();
@@ -48,6 +69,8 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
     <section className={styles.container}>
       <Header currentProc={currentProc}/>
       <div className={styles.progStatus}>
+
+        {/* progressbar */}
         <div className={styles.progLeft}>
           <Box className={styles.progBox}>
             <CircularProgress
@@ -60,6 +83,8 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
             </Typography>
           </Box>
         </div>
+
+        {/* progress info */}
         <div className={styles.progRight}>
           <div className={styles.rightContent}>
             <h1>Status:
@@ -80,11 +105,18 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
               <p>Exception: {currentProc.Exception}</p>
               : null
             }
-            {
-              currentProc.TaskStatus !== TaskStatus.Ready ?
-              <button onClick={() => sendTaskCancellation(currentProc.Id)}>
-                cancel task
-              </button>
+            { // display cancel task button if task is running|starting
+              currentProc.TaskStatus === (TaskStatus.Running || TaskStatus.Starting)
+              ? <button
+                  onClick={() => sendTaskCancellation(currentProc.Id)}
+                >cancel task</button>
+              : null
+            }
+            { // remove task and navigate to main
+              currentProc.TaskStatus === (TaskStatus.Stopped || TaskStatus.Ready)
+              ? <Link to='/'><button
+                  onClick={() => sendTaskRemoval(currentProc.Id)}
+                >Remove task</button></Link>
               : null
             }
           </div>
