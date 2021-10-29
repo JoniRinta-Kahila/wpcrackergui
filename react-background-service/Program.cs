@@ -25,6 +25,13 @@ namespace react_background_service
             SendStatus();
         }
 
+        private static long GetTime()
+        {
+            DateTime utcNow = DateTime.UtcNow;
+            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
+            return (long)((utcNow - epoch).TotalMilliseconds);
+        }
+
         static System.Threading.Tasks.Task Main()
         {
             var reportTimer = new System.Timers.Timer {Interval = 2000};
@@ -61,6 +68,7 @@ namespace react_background_service
                             Name = action.Name,
                             Percentage = 0,
                             Url = action.Url,
+                            TimeStart = GetTime(),
                             TaskStatus = Status.Starting,
                             TaskType = action.TaskType,
                             MessageAction = Action.Ping,
@@ -164,6 +172,7 @@ namespace react_background_service
                                     var progress = $"{percentage * 100:0.0000}";
 
                                     process.Percentage = Convert.ToDouble(percentage * 100);
+                                    process.TimeRemaining = remaining;
                                 }
 
                                 while (!sr.EndOfStream)
@@ -209,6 +218,8 @@ namespace react_background_service
                                         }
                                     });
 
+                                    // report completion time
+                                    process.CompletionTime = GetTime();
                                     if (found) return;
                                 }
 

@@ -11,6 +11,9 @@ namespace react_background_service
         public int Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
+        public long TimeStart { get; set; }
+        public long CompletionTime { get; set; }
+        public TimeSpan TimeRemaining { get; set; }
         public string Username { get; set; }
         public string Wordlist { get; set; }
         public double Percentage { get; set; }

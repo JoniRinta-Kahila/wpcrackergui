@@ -1,6 +1,6 @@
 import React from 'react';
 import { RxMessage } from '_/types/message';
-import styles from './enumResult.module.scss';
+import styles from './bruteResult.module.scss';
 
 type EnumResultProps = {
   currentProc : RxMessage,
@@ -8,14 +8,14 @@ type EnumResultProps = {
 
 const BruteResult: React.FC<EnumResultProps> = ({ currentProc }) => {
   return (
-    <section className={styles.section}>
+    <section className={styles.container}>
     {
-      currentProc.TaskResult?.BruteForce ?
-      <>
-        <h1>BRUTE FORCE RESULT:</h1>      
-        <p>Username: {currentProc.TaskResult.BruteForce.Username}</p>
-        <p>Password: {currentProc.TaskResult.BruteForce.Password}</p>
-      </>
+      currentProc.TaskResult?.BruteForce
+      ? <>
+          <h1>BRUTE FORCE RESULT:</h1>      
+          <p>Username: {currentProc.TaskResult.BruteForce.Username}</p>
+          <p>Password: {currentProc.TaskResult.BruteForce.Password}</p>
+        </>
       : <p>Empty result</p>
     } 
   </section>

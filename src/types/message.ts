@@ -42,9 +42,13 @@ export type EnumResult = {
 export type RxMessage = {
   MessageAction: MessageAction,
   TaskType: TaskType,
+  Username?: string,
   Id: number,
   Name: string,
   Url: string,
+  TimeStart: number,
+  CompletionTime: number,
+  TimeRemaining: number,
   Percentage: number,
   TaskResult?: Result,
   TaskStatus?: TaskStatus,

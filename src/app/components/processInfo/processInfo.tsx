@@ -71,18 +71,22 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
       <div className={styles.progStatus}>
 
         {/* progressbar */}
-        <div className={styles.progLeft}>
-          <Box className={styles.progBox}>
-            <CircularProgress
-              size='150px'
-              variant='determinate'
-              value={currentProc.Percentage}
-            />
-            <Typography className={styles.progVal}>
-              {`${Math.round(currentProc.Percentage || 0,)}%`}
-            </Typography>
-          </Box>
-        </div>
+        {
+          currentProc.TaskStatus !== TaskStatus.Ready
+          ? <div className={styles.progLeft}>
+              <Box className={styles.progBox}>
+                <CircularProgress
+                  size='150px'
+                  variant='determinate'
+                  value={currentProc.Percentage}
+                />
+                <Typography className={styles.progVal}>
+                  {`${Math.round(currentProc.Percentage || 0,)}%`}
+                </Typography>
+              </Box>
+            </div>
+          : null
+        }
 
         {/* progress info */}
         <div className={styles.progRight}>
@@ -96,25 +100,40 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
                 null
               }
             </h1>
-            <p>Start Time:</p>
+            {/* If TaskType is BruteForce, Show username */}
+            {
+              currentProc.TaskType === TaskType.BruteForce
+              ? <p>Username: {currentProc.Username}</p>
+              : null
+            }
+            <p>Start Time: {`${new Date(currentProc.TimeStart).getHours()}:${new Date(currentProc.TimeStart).getMinutes()}`}</p>
             <p>Progress: {currentProc.Percentage}%</p>
-            <p>Estimated completion time: </p>
-            <p>Time left: </p>
+            <p>Time left: {
+                currentProc.TaskStatus === TaskStatus.Ready
+                  ? "0"
+                  : currentProc.TimeRemaining
+              }
+            </p>
+
+            {/* Display completion time */}
+            {
+              currentProc.TaskStatus === TaskStatus.Stopped || currentProc.TaskStatus === TaskStatus.Ready
+              ? <p>Completion time: {`${new Date(currentProc.CompletionTime).getHours()}:${new Date(currentProc.CompletionTime).getMinutes()}`}</p>
+              : null
+            }
+
+            {/* Display exception */}
             {
               currentProc.Exception ?
               <p>Exception: {currentProc.Exception}</p>
               : null
             }
-            { // display cancel task button if task is running|starting
-              currentProc.TaskStatus === (TaskStatus.Running || TaskStatus.Starting)
-              ? <button
-                  onClick={() => sendTaskCancellation(currentProc.Id)}
-                >cancel task</button>
-              : null
-            }
-            { // remove task and navigate to main
-              currentProc.TaskStatus === (TaskStatus.Stopped || TaskStatus.Ready)
+
+            {/* Button: remove task and navigate to main */}
+            {
+              currentProc.TaskStatus === TaskStatus.Stopped ||  currentProc.TaskStatus === TaskStatus.Ready
               ? <Link to='/'><button
+                  style={{marginTop:'5px'}}
                   onClick={() => sendTaskRemoval(currentProc.Id)}
                 >Remove task</button></Link>
               : null
@@ -122,12 +141,16 @@ const ProcessInfo: React.FC<ProcessInfoProps> = ({ data }) => {
           </div>
         </div>
       </div>
-      { // resolve the results to be presented
+
+      {/* Resolve the results to be presented or show cancel button */}
+      {
         currentProc.TaskStatus === TaskStatus.Ready ?
         (currentProc.TaskType === TaskType.BruteForce ?
         <BruteResult currentProc={currentProc} /> :
         <EnumResult currentProc = {currentProc} />)
-        : null
+        : <button
+            onClick={() => sendTaskCancellation(currentProc.Id)}
+          >cancel task</button>
       }
     </section>
   )
