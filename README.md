@@ -1,3 +1,4 @@
+[![CodeQL](https://github.com/JoniRinta-Kahila/wpcrackergui/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/JoniRinta-Kahila/wpcrackergui/actions/workflows/codeql-analysis.yml)
 # WordPress pentest tool project with GUI
 ### WordPress Brute Force & Username enumeration
 
